@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "agin-chat",
+  "productName": "Agin Chat",
   "version": "0.1.0",
   "identifier": "rocks.agin.chat.desktop",
   "build": {
@@ -12,9 +12,11 @@
   "app": {
     "windows": [
       {
-        "title": "agin-chat",
+        "title": "Agin Chat",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true
       }
     ],
     "security": {
