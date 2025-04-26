@@ -41,6 +41,10 @@ export default defineConfig(async () => ({
     alias: {
       // @ts-expect-error process is a nodejs global
       "@": path.resolve(__dirname, "./src"),
+      // @ts-expect-error process is a nodejs global
+      "@lib": path.resolve(__dirname, "./src/lib"),
+      // @ts-expect-error process is a nodejs global
+      "@components": path.resolve(__dirname, "./src/components"),
     },
   },
 }));

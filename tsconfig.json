@@ -22,7 +22,9 @@
     
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@components/*": ["./src/components/*"]
     }
   },
   "include": ["src"],
