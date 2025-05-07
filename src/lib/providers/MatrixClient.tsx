@@ -13,7 +13,8 @@ export function MatrixClientProvider({ children }: MatrixClientProviderProps) {
 
     return (
         <MatrixClientContext.Provider value={null}>
-            <SplashScreen></SplashScreen>
+            {/* <SplashScreen></SplashScreen> */}
+            {children}
         </MatrixClientContext.Provider>
     );
 }
