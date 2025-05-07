@@ -16,4 +16,3 @@ export function SplashScreen({ children }: SplashScreenProps) {
 }
 
 export * from './SplashSection';
-export * from './AbstractGradient';
