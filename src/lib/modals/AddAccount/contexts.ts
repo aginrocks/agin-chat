@@ -1,7 +1,11 @@
 import { useForm } from '@mantine/form';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
-export type LoginStage = 'rocks.agin.chat.select_homeserver' | 'm.login.password';
+export type LoginStage =
+    | 'rocks.agin.chat.select_homeserver'
+    | 'loading'
+    | 'error'
+    | 'm.login.password';
 
 export type LoginDetails = {
     homeserver: string;
@@ -17,3 +21,6 @@ export const StageContext = createContext<StageContextType>([
     'rocks.agin.chat.select_homeserver',
     () => {},
 ]);
+
+export type ErrorContextType = [string, Dispatch<SetStateAction<string>>];
+export const ErrorContext = createContext<ErrorContextType>(['', () => {}]);
