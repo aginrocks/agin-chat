@@ -1,36 +1,70 @@
 import { useCallback, useState } from 'react';
-import { ModalName, Modal, ModalProps, ModalReturnValue, ModalStoreItem } from './types';
+import { ModalName, ModalProps, ModalReturnValue, ModalStore, ModalStoreItem } from './types';
 import { ModalsContext } from './contexts';
-import * as uuid from 'uuid';
+import { ModalsBinding } from './modals';
 
 export type ModalsManagerProps = {
     children?: React.ReactNode;
 };
 
-export function ModalsManagerProvider({ children }: ModalsManagerProps) {
-    const [modals, setModals] = useState<ModalStoreItem<any>[]>([]);
+const CLOSE_DURATION_MS = 300;
 
-    const showModal = useCallback(
+export function ModalsManagerProvider({ children }: ModalsManagerProps) {
+    const [modals, setModals] = useState<ModalStore>({});
+
+    const show = useCallback(
         <T extends ModalName>(
             modalName: T,
-            payload: ModalProps<T>
+            payload?: ModalProps<T>
         ): Promise<ModalReturnValue<T> | undefined> => {
             return new Promise((resolve) => {
-                const modalId = uuid.v4();
-
                 const modalDetails: ModalStoreItem<T> = {
-                    id: modalId,
+                    name: modalName,
+                    state: 'visible',
                     payload,
                     resolve,
                 };
 
-                setModals((m) => [...m, modalDetails]);
+                setModals((m) => {
+                    const newModals = { ...m, [modalName]: modalDetails };
+                    return newModals;
+                });
             });
         },
         [modals]
     );
 
-    const hideModal = useCallback((id: string) => {}, []);
+    const hide = useCallback(
+        <T extends ModalName>(modalName: T, payload: ModalReturnValue<T>) => {
+            setModals((m) => {
+                const newModals = { ...m };
+                if (newModals[modalName]) {
+                    newModals[modalName].state = 'closing';
+                }
+                requestAnimationFrame(() => newModals[modalName]?.resolve(payload));
+                return newModals;
+            });
+            setTimeout(() => {
+                setModals((m) => {
+                    const newModals = { ...m };
+                    delete newModals[modalName];
+                    return newModals;
+                });
+            }, CLOSE_DURATION_MS);
+        },
+        [modals]
+    );
 
-    return <ModalsContext.Provider value={[modals, setModals]}>{children}</ModalsContext.Provider>;
+    return (
+        <ModalsContext.Provider value={{ show, hide }}>
+            {Object.values(modals).map((m) => {
+                const ModalComponent = ModalsBinding[m.name];
+
+                return <ModalComponent payload={m.payload} open={m.state === 'visible'} />;
+            })}
+            {children}
+        </ModalsContext.Provider>
+    );
 }
+
+export * from './hooks';

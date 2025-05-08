@@ -3,7 +3,7 @@ import { ModalComponentBindings, ModalDefinition } from './types';
 
 export type Modals = {
     AddAccount: ModalDefinition<{
-        payload: never;
+        payload: undefined;
         returnValue: {
             success: boolean;
         };

@@ -16,8 +16,15 @@ export type ModalComponentBindings = {
     [T in ModalName]: React.FC<{ payload: ModalProps<T>; open: boolean }>;
 };
 
+export type ModalState = 'visible' | 'closing';
+
 export type ModalStoreItem<T extends ModalName> = {
-    id: string;
-    payload: ModalProps<T>;
+    name: T;
+    state: ModalState;
+    payload?: ModalProps<T>;
     resolve: (value: ModalReturnValue<T> | undefined) => void;
+};
+
+export type ModalStore = {
+    [T in ModalName]?: ModalStoreItem<T>;
 };
