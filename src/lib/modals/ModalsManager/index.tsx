@@ -35,7 +35,7 @@ export function ModalsManagerProvider({ children }: ModalsManagerProps) {
     );
 
     const hide = useCallback(
-        <T extends ModalName>(modalName: T, payload: ModalReturnValue<T>) => {
+        <T extends ModalName>(modalName: T, payload?: ModalReturnValue<T>) => {
             try {
                 setModals((m) => {
                     const newModals = { ...m };
@@ -71,7 +71,7 @@ export function ModalsManagerProvider({ children }: ModalsManagerProps) {
                         open={m.state === 'visible'}
                         onOpenChange={(open) => {
                             if (!open) {
-                                hide(m.name, undefined);
+                                hide(m.name);
                             }
                         }}
                         key={m.name}

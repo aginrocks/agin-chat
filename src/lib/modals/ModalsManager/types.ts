@@ -5,7 +5,8 @@ export type DefaultModalDefinition = {
     payload: any;
     returnValue: any;
 };
-export type ModalDefinition<T extends DefaultModalDefinition = any> = Omit<T, 'returnValue'> & {
+export type ModalDefinition<T extends DefaultModalDefinition = any> = {
+    payload: T['payload'] | undefined;
     returnValue: T['returnValue'] | undefined;
 };
 

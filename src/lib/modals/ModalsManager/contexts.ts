@@ -6,7 +6,7 @@ export type ModalsContextType = {
         modalName: T,
         payload?: ModalPayload<T>
     ) => Promise<ModalReturnValue<T> | undefined>;
-    hide: <T extends ModalName>(modalName: T, payload: ModalReturnValue<T>) => void;
+    hide: <T extends ModalName>(modalName: T, payload?: ModalReturnValue<T>) => void;
 };
 
 const initial: ModalsContextType = {

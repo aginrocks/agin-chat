@@ -10,6 +10,7 @@ import { AddAccountContext, LoginDetails, LoginStage, StageContext } from './con
 import { ModalProps } from '../ModalsManager';
 
 export function AddAccount({
+    payload,
     ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root> & ModalProps<'AddAccount'>) {
     const form = useForm<LoginDetails>({
