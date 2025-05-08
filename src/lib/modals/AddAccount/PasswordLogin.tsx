@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AddAccountContext, StageContext } from '.';
+import { AddAccountContext, StageContext } from './contexts';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';

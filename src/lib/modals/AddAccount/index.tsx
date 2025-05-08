@@ -1,29 +1,14 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useForm } from '@mantine/form';
 import { AnimatePresence, motion } from 'motion/react';
-import { createContext, Dispatch, useState } from 'react';
+import { useState } from 'react';
 import { SelectHomeserver } from './SelectHomeserver';
-import { SetStateAction } from 'jotai';
 import { PasswordLogin } from './PasswordLogin';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+import * as React from 'react';
+import { AddAccountContext, LoginDetails, LoginStage, StageContext } from './contexts';
 
-export type LoginStage = 'rocks.agin.chat.select_homeserver' | 'm.login.password';
-
-export type LoginDetails = {
-    homeserver: string;
-    username: string;
-    password: string;
-};
-
-export type AddAccountContextType = ReturnType<typeof useForm<LoginDetails>>;
-export const AddAccountContext = createContext<AddAccountContextType | null>(null);
-
-export type StageContextType = [LoginStage, Dispatch<SetStateAction<LoginStage>>];
-export const StageContext = createContext<StageContextType>([
-    'rocks.agin.chat.select_homeserver',
-    () => {},
-]);
-
-export function AddAccount() {
+export function AddAccount({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
     const form = useForm<LoginDetails>({
         initialValues: {
             homeserver: 'matrix.org',
@@ -35,7 +20,7 @@ export function AddAccount() {
     const [stage, setStage] = useState<LoginStage>('rocks.agin.chat.select_homeserver');
 
     return (
-        <Dialog>
+        <Dialog {...props}>
             <DialogContent className="w-md">
                 <AddAccountContext.Provider value={form}>
                     <StageContext.Provider value={[stage, setStage]}>
