@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { createFileRoute } from '@tanstack/react-router';
 import { IconArrowRight } from '@tabler/icons-react';
 import { APP_NAME, APP_TAGLINE } from '@/lib/constants/names';
-import { AddAccount, useModals } from '@/lib/modals';
+import { useModals } from '@/lib/modals';
 
 export const Route = createFileRoute('/welcome')({
     component: RouteComponent,

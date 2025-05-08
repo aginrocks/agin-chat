@@ -7,8 +7,11 @@ import { PasswordLogin } from './PasswordLogin';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import * as React from 'react';
 import { AddAccountContext, LoginDetails, LoginStage, StageContext } from './contexts';
+import { ModalProps } from '../ModalsManager';
 
-export function AddAccount({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
+export function AddAccount({
+    ...props
+}: React.ComponentProps<typeof DialogPrimitive.Root> & ModalProps<'AddAccount'>) {
     const form = useForm<LoginDetails>({
         initialValues: {
             homeserver: 'matrix.org',

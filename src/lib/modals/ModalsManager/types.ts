@@ -1,19 +1,27 @@
 import { Modals } from './modals';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 
 export type DefaultModalDefinition = {
     payload: any;
     returnValue: any;
 };
-export type ModalDefinition<T extends DefaultModalDefinition = any> = T;
+export type ModalDefinition<T extends DefaultModalDefinition = any> = Omit<T, 'returnValue'> & {
+    returnValue: T['returnValue'] | undefined;
+};
 
 export type ModalName = keyof Modals;
 export type Modal<T extends ModalName> = Modals[T];
 
-export type ModalProps<T extends ModalName> = Modals[T]['payload'];
+export type ModalPayload<T extends ModalName> = Modals[T]['payload'];
 export type ModalReturnValue<T extends ModalName> = Modals[T]['returnValue'];
 
+export type ModalProps<T extends ModalName> = React.ComponentProps<typeof DialogPrimitive.Root> & {
+    payload: ModalPayload<T>;
+    modalName: T;
+};
+
 export type ModalComponentBindings = {
-    [T in ModalName]: React.FC<{ payload: ModalProps<T>; open: boolean }>;
+    [T in ModalName]: React.FC<ModalProps<T>>;
 };
 
 export type ModalState = 'visible' | 'closing';
@@ -21,7 +29,7 @@ export type ModalState = 'visible' | 'closing';
 export type ModalStoreItem<T extends ModalName> = {
     name: T;
     state: ModalState;
-    payload?: ModalProps<T>;
+    payload?: ModalPayload<T>;
     resolve: (value: ModalReturnValue<T> | undefined) => void;
 };
 
