@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import { FlowsContext, StageContext } from './contexts';
 import { Button } from '@/components/ui/button';
 import { IconArrowRight } from '@tabler/icons-react';
-import { PasswordFlow } from './flows';
-import { SSOFlow } from './flows/SSO';
+import { PasswordFlow, SSOFlow } from './flows';
 import { Separator } from '@/components/ui/separator';
 import clsx from 'clsx';
 import { cn } from '@/lib/utils';
@@ -27,17 +26,11 @@ export function Login() {
             <div className="flex justify-end gap-2">
                 <Button
                     variant="ghost"
-                    className={cn('text-muted-foreground', clsx({ 'w-full': flows.length > 1 }))}
+                    className="text-muted-foreground w-full"
                     onClick={() => setStage('select_homeserver')}
                 >
                     Change homeserver
                 </Button>
-                {loginButtonVisible && (
-                    <Button onClick={() => setStage('login')}>
-                        Sign In
-                        <IconArrowRight />
-                    </Button>
-                )}
             </div>
         </div>
     );

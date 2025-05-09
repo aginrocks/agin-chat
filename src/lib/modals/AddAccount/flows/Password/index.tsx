@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
 import { useContext } from 'react';
-import { FlowsContext, FormContext } from '../contexts';
+import { FlowsContext, FormContext } from '../../contexts';
 import { Button } from '@/components/ui/button';
 
 export function PasswordFlow() {
@@ -20,7 +20,7 @@ export function PasswordFlow() {
                 <Label className="text-sm">Password</Label>
                 <Input type="password" {...form?.getInputProps('password')} />
             </div>
-            {loginButtonVisible && <Button className="mt-1">Sign In</Button>}
+            <Button className="mt-1">Sign In</Button>
         </div>
     );
 }
