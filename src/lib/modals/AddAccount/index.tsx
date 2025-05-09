@@ -15,6 +15,8 @@ import {
 } from './contexts';
 import { ModalProps } from '../ModalsManager';
 import { ErrorMessage } from '@/components/ui/error';
+import { SpinnerSection } from '@/components/ui/spinner-section';
+import { Button } from '@/components/ui/button';
 
 export function AddAccount({
     payload,
@@ -28,7 +30,7 @@ export function AddAccount({
         },
     });
 
-    const [stage, setStage] = useState<LoginStage>('rocks.agin.chat.select_homeserver');
+    const [stage, setStage] = useState<LoginStage>('select_homeserver');
     const [error, setError] = useState('');
 
     return (
@@ -48,16 +50,29 @@ export function AddAccount({
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -10 }}
                                 >
-                                    {stage === 'rocks.agin.chat.select_homeserver' && (
-                                        <SelectHomeserver />
+                                    {stage === 'select_homeserver' && <SelectHomeserver />}
+                                    {stage === 'loading' && (
+                                        <SpinnerSection>
+                                            <Button
+                                                variant="ghost"
+                                                className="text-muted-foreground"
+                                                size="sm"
+                                            >
+                                                Cancel
+                                            </Button>
+                                        </SpinnerSection>
                                     )}
                                     {stage === 'error' && (
-                                        <ErrorMessage
-                                            title="An error occurred"
-                                            description={error}
-                                        />
+                                        <ErrorMessage title="An error occurred" description={error}>
+                                            <Button
+                                                variant="secondary"
+                                                onClick={() => setStage('select_homeserver')}
+                                            >
+                                                Change homeserver
+                                            </Button>
+                                        </ErrorMessage>
                                     )}
-                                    {stage === 'm.login.password' && <PasswordLogin />}
+                                    {stage === 'login' && <PasswordLogin />}
                                 </motion.div>
                             </AnimatePresence>
                         </ErrorContext.Provider>

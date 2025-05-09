@@ -23,11 +23,11 @@ export function PasswordLogin() {
                 <Button
                     variant="ghost"
                     className="text-muted-foreground"
-                    onClick={() => setStage('rocks.agin.chat.select_homeserver')}
+                    onClick={() => setStage('select_homeserver')}
                 >
                     Change homeserver
                 </Button>
-                <Button className="w-20" onClick={() => setStage('m.login.password')}>
+                <Button className="w-20" onClick={() => setStage('login')}>
                     Next
                     <IconArrowRight />
                 </Button>
