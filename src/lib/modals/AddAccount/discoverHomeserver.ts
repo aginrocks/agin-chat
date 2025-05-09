@@ -5,6 +5,8 @@ import {
     ILoginFlowsResponse,
 } from 'matrix-js-sdk';
 
+export const SUPPORTED_FLOWS = ['m.login.password', 'm.login.sso'];
+
 export async function discoverHomeserver(url: string) {
     const result = await AutoDiscovery.findClientConfig(url);
     let loginFlows: ILoginFlowsResponse | undefined = undefined;
@@ -17,6 +19,7 @@ export async function discoverHomeserver(url: string) {
         });
 
         loginFlows = await client.loginFlows();
+        loginFlows.flows = loginFlows.flows.filter((flow) => SUPPORTED_FLOWS.includes(flow.type));
 
         client.stopClient();
     }

@@ -1,5 +1,5 @@
-import { useCallback, useContext, useEffect } from 'react';
-import { AddAccountContext, ErrorContext, StageContext } from './contexts';
+import { useCallback, useContext } from 'react';
+import { FormContext, ErrorContext, FlowsContext, StageContext } from './contexts';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@radix-ui/react-label';
@@ -8,9 +8,10 @@ import { discoverHomeserver } from './discoverHomeserver';
 import { AutoDiscoveryAction } from 'matrix-js-sdk';
 
 export function SelectHomeserver() {
-    const form = useContext(AddAccountContext);
+    const form = useContext(FormContext);
     const [stage, setStage] = useContext(StageContext);
     const [error, setError] = useContext(ErrorContext);
+    const [flows, setFlows] = useContext(FlowsContext);
 
     const discoverServer = useCallback(async () => {
         if (!form?.values.homeserver) return;
@@ -21,6 +22,7 @@ export function SelectHomeserver() {
         console.log(loginFlows);
         if (result['m.homeserver'].state === AutoDiscoveryAction.SUCCESS) {
             setStage('login');
+            setFlows(loginFlows?.flows ?? []);
         } else {
             const message = result['m.homeserver'].error?.toString();
             setStage('error');
