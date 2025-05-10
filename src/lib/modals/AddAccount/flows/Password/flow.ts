@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { loginAndSave } from '../../util/login';
 import { UserIdentifier } from 'matrix-js-sdk';
 import { getSessionName, validEmail } from '@lib/utils';
+import { useLogin } from '@lib/hooks';
 
 export type LoginParams = {
     baseUrl: string;
@@ -10,6 +10,8 @@ export type LoginParams = {
 };
 
 export function usePasswordFlow() {
+    const { loginAndSave } = useLogin();
+
     const login = useCallback(async ({ baseUrl, username, password }: LoginParams) => {
         let identifier: UserIdentifier;
         if (validEmail(username)) {
