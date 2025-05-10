@@ -1,6 +1,7 @@
 import { cn } from '@lib/utils';
 import { Icon } from '@tabler/icons-react';
 import { cva, VariantProps } from 'class-variance-authority';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 
 type SidebarItemProps = VariantProps<typeof itemVariants> & {
     icon?: Icon;
@@ -21,5 +22,14 @@ const itemVariants = cva(
 );
 
 export function SidebarItem({ icon: Icon, label, active = false }: SidebarItemProps) {
-    return <div className={cn(itemVariants({ active }))}>{Icon && <Icon size={18} />}</div>;
+    return (
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <div className={cn(itemVariants({ active }))}>{Icon && <Icon size={18} />}</div>
+            </TooltipTrigger>
+            <TooltipContent side="right">
+                <p>{label}</p>
+            </TooltipContent>
+        </Tooltip>
+    );
 }

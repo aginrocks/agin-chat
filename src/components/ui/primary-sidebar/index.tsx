@@ -3,10 +3,6 @@ import { SidebarItem } from './SidebarItem';
 import { IconHome, IconSettings, IconUsers } from '@tabler/icons-react';
 import { SidebarSeparator } from './SidebarSeparator';
 
-type PrimarySidebarProps = {
-    children?: React.ReactNode;
-};
-
 export function PrimarySidebar() {
     const { pathname } = useLocation();
     const tab = pathname.split('/')[2];
@@ -18,7 +14,11 @@ export function PrimarySidebar() {
                     <SidebarItem icon={IconHome} label="Home" active={tab === 'home'} />
                 </Link>
                 <Link to="/app/direct">
-                    <SidebarItem icon={IconUsers} label="DMs" active={tab === 'direct'} />
+                    <SidebarItem
+                        icon={IconUsers}
+                        label="Direct Messages"
+                        active={tab === 'direct'}
+                    />
                 </Link>
                 <SidebarSeparator />
             </div>
