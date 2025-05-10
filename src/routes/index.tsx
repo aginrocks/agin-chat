@@ -4,7 +4,7 @@ export const Route = createFileRoute('/')({
     component: RouteComponent,
     loader: () => {
         throw redirect({
-            to: '/app/home',
+            to: '/app/direct',
         });
     },
 });
