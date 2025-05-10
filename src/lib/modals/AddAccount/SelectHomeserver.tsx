@@ -6,6 +6,7 @@ import { Label } from '@radix-ui/react-label';
 import { IconArrowRight } from '@tabler/icons-react';
 import { discoverHomeserver } from './discoverHomeserver';
 import { AutoDiscoveryAction } from 'matrix-js-sdk';
+import { APP_NAME } from '@/lib/constants/names';
 
 export function SelectHomeserver() {
     const form = useContext(FormContext);
@@ -20,6 +21,15 @@ export function SelectHomeserver() {
         const { result, loginFlows } = await discoverHomeserver(form?.values.homeserver);
         console.log(result);
         console.log(loginFlows);
+
+        if (loginFlows?.flows.length === 0) {
+            setStage('error');
+            setError(
+                `${APP_NAME} does not support this homeserver. Please open an issue on GitHub or ask the homeserver owner to enable password or SSO authentication.`
+            );
+            return;
+        }
+
         if (result['m.homeserver'].state === AutoDiscoveryAction.SUCCESS) {
             setStage('login');
             setFlows(loginFlows?.flows ?? []);
