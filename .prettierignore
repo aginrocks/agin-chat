@@ -5,3 +5,4 @@ LICENSE
 README.md
 src-tauri
 src/routeTree.gen.ts
+vite.config.ts

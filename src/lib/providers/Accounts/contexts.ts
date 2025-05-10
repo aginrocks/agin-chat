@@ -10,3 +10,9 @@ export const AccountsContext = createContext<AccountsContextType>(initialAccount
 export type AccountsProviderProps = {
     children?: React.ReactNode;
 };
+
+export type SelectedAccountContextType = [Account | null, Dispatch<SetStateAction<Account | null>>];
+const initialSelectedAccount: SelectedAccountContextType = [null, () => {}];
+
+export const SelectedAccountContext =
+    createContext<SelectedAccountContextType>(initialSelectedAccount);

@@ -45,6 +45,9 @@ export default defineConfig(async () => ({
       "@lib": path.resolve(__dirname, "./src/lib"),
       // @ts-expect-error process is a nodejs global
       "@components": path.resolve(__dirname, "./src/components"),
+      
+      // @ts-expect-error process is a nodejs global
+      '/node_modules/.vite/deps/pkg/matrix_sdk_crypto_wasm_bg.wasm': path.resolve(__dirname, './public/matrix_sdk_crypto_wasm_bg.wasm'),
     },
   },
 }));
