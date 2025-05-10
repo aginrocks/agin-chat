@@ -1,18 +1,18 @@
 import { useCallback, useContext } from 'react';
 import { FormContext, ErrorContext, FlowsContext, StageContext } from './contexts';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@components/ui/button';
+import { Input } from '@components/ui/input';
 import { Label } from '@radix-ui/react-label';
 import { IconArrowRight } from '@tabler/icons-react';
 import { discoverHomeserver } from './discoverHomeserver';
 import { AutoDiscoveryAction } from 'matrix-js-sdk';
-import { APP_NAME } from '@/lib/constants/names';
+import { APP_NAME } from '@lib/constants/names';
 
 export function SelectHomeserver() {
     const form = useContext(FormContext);
-    const [stage, setStage] = useContext(StageContext);
-    const [error, setError] = useContext(ErrorContext);
-    const [flows, setFlows] = useContext(FlowsContext);
+    const [, setStage] = useContext(StageContext);
+    const [, setError] = useContext(ErrorContext);
+    const [, setFlows] = useContext(FlowsContext);
 
     const discoverServer = useCallback(async () => {
         if (!form?.values.homeserver) return;

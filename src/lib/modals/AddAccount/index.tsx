@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@components/ui/dialog';
 import { useForm } from '@mantine/form';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
@@ -15,9 +15,9 @@ import {
     StageContext,
 } from './contexts';
 import { ModalProps } from '../ModalsManager';
-import { ErrorMessage } from '@/components/ui/error';
-import { SpinnerSection } from '@/components/ui/spinner-section';
-import { Button } from '@/components/ui/button';
+import { ErrorMessage } from '@components/ui/error';
+import { SpinnerSection } from '@components/ui/spinner-section';
+import { Button } from '@components/ui/button';
 import { ILoginFlow } from 'matrix-js-sdk';
 
 export function AddAccount({

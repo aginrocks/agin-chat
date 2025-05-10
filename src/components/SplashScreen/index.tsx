@@ -1,5 +1,5 @@
 import { SplashSection } from './SplashSection';
-import { Spinner } from '@/components/ui/spinner';
+import { Spinner } from '@components/ui/spinner';
 
 export type SplashScreenProps = {
     children?: React.ReactNode;

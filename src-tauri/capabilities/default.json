@@ -10,6 +10,7 @@
     "opener:default",
     "opener:allow-open-url",
     "oauth:allow-cancel",
-    "store:default"
+    "store:default",
+    "os:default"
   ]
 }

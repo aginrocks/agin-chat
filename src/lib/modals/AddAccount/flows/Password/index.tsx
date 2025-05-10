@@ -1,14 +1,13 @@
-import { Input } from '@/components/ui/input';
+import { Input } from '@components/ui/input';
 import { Label } from '@radix-ui/react-label';
 import { useContext } from 'react';
-import { FlowsContext, FormContext } from '../../contexts';
-import { Button } from '@/components/ui/button';
+import { FormContext } from '../../contexts';
+import { Button } from '@components/ui/button';
+import { usePasswordFlow } from './flow';
 
 export function PasswordFlow() {
     const form = useContext(FormContext);
-    const [flows] = useContext(FlowsContext);
-
-    const loginButtonVisible = flows.length !== 1;
+    const flow = usePasswordFlow();
 
     return (
         <div className="flex flex-col gap-3">
@@ -20,7 +19,18 @@ export function PasswordFlow() {
                 <Label className="text-sm">Password</Label>
                 <Input type="password" {...form?.getInputProps('password')} />
             </div>
-            <Button className="mt-1">Sign In</Button>
+            <Button
+                className="mt-1"
+                onClick={() =>
+                    flow.login({
+                        baseUrl: form?.values.homeserver_base_url ?? '',
+                        username: form?.values.username ?? '',
+                        password: form?.values.password ?? '',
+                    })
+                }
+            >
+                Sign In
+            </Button>
         </div>
     );
 }

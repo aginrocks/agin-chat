@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useRef } from 'react';
 import { FlowsContext, FormContext } from '../../contexts';
 import { ISSOFlow } from 'matrix-js-sdk';
-import { Button } from '@/components/ui/button';
+import { Button } from '@components/ui/button';
 import { useSSOFlow } from './flow';
 
 export function SSOFlow() {

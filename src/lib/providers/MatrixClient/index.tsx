@@ -1,12 +1,6 @@
-import { createContext, useState } from 'react';
-import { MatrixClient } from 'matrix-js-sdk';
-import { SplashScreen } from '@/components/SplashScreen';
-
-export const MatrixClientContext = createContext<MatrixClient | null>(null);
-
-export type MatrixClientProviderProps = {
-    children?: React.ReactNode;
-};
+import { useState } from 'react';
+import { MatrixClientContext, MatrixClientProviderProps } from './contexts';
+import { SplashScreen } from '@components/SplashScreen';
 
 export function MatrixClientProvider({ children }: MatrixClientProviderProps) {
     const [loading, setLoading] = useState(true);
@@ -18,3 +12,5 @@ export function MatrixClientProvider({ children }: MatrixClientProviderProps) {
         </MatrixClientContext.Provider>
     );
 }
+
+export * from './contexts';

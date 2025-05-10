@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@lib/utils';
 import { Spinner } from './spinner';
 
 export type SpinnerSectionProps = React.ComponentProps<'div'> & {
