@@ -1,12 +1,19 @@
-import { APP_NAME } from '@lib/constants/names';
+import { useTitle } from '@lib/hooks';
 
 export function Titlebar() {
+    const [title] = useTitle();
     return (
         <div
             data-tauri-drag-region
-            className="flex w-full justify-center items-center h-8 select-none"
+            className="flex w-full justify-center items-center h-8 select-none gap-2"
         >
-            <div className="text-xs font-semibold">{APP_NAME}</div>
+            {title.icon &&
+                (typeof title.icon === 'string' ? (
+                    <></>
+                ) : (
+                    <title.icon size={14} className="text-muted-foreground" />
+                ))}
+            <div className="text-xs font-semibold">{title.title}</div>
         </div>
     );
 }

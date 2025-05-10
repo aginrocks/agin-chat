@@ -1,7 +1,6 @@
-import { useLocation } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 import { SidebarItem } from './SidebarItem';
-import { IconHome, IconMessage, IconSettings, IconUser, IconUsers } from '@tabler/icons-react';
-import { Separator } from '../separator';
+import { IconHome, IconSettings, IconUsers } from '@tabler/icons-react';
 import { SidebarSeparator } from './SidebarSeparator';
 
 type PrimarySidebarProps = {
@@ -10,13 +9,17 @@ type PrimarySidebarProps = {
 
 export function PrimarySidebar() {
     const { pathname } = useLocation();
-    const tab = pathname.split('/')[1];
+    const tab = pathname.split('/')[2];
 
     return (
         <div className="flex flex-col justify-between p-3.5 pt-0 h-full">
             <div className="flex flex-col gap-2.5">
-                <SidebarItem icon={IconHome} label="Home" active />
-                <SidebarItem icon={IconUsers} label="DMs" />
+                <Link to="/app/home">
+                    <SidebarItem icon={IconHome} label="Home" active={tab === 'home'} />
+                </Link>
+                <Link to="/app/direct">
+                    <SidebarItem icon={IconUsers} label="DMs" active={tab === 'direct'} />
+                </Link>
                 <SidebarSeparator />
             </div>
             <div className="flex flex-col gap-2.5">
