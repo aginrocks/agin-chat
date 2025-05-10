@@ -2,9 +2,15 @@ import { addAccount } from '@lib/store';
 import { createClient, LoginRequest } from 'matrix-js-sdk';
 import { useCallback, useContext } from 'react';
 import { AccountsContext } from '../providers/Accounts';
+import { useNavigate } from '@tanstack/react-router';
+import { useAccount } from './useAccount';
+import { useModals } from '@lib/modals';
 
 export function useLogin() {
     const [, setAccounts] = useContext(AccountsContext);
+    const [, setAccount] = useAccount();
+    const modals = useModals();
+    const navigate = useNavigate();
 
     const loginAndSave = useCallback(async (baseUrl: string, data: LoginRequest) => {
         const mx = createClient({
@@ -24,8 +30,12 @@ export function useLogin() {
         await addAccount(account);
 
         setAccounts((acc) => [...acc, account]);
+        setAccount(account);
 
         mx.stopClient();
+
+        navigate({ to: '/app/home' });
+        modals.hide('AddAccount');
 
         return result;
     }, []);
