@@ -8,11 +8,11 @@ type SidebarItemProps = VariantProps<typeof itemVariants> & {
 };
 
 const itemVariants = cva(
-    'flex justify-center items-center rounded-lg w-10 h-10 cursor-pointer border',
+    'flex justify-center items-center rounded-lg w-10 h-10 cursor-pointer border transition',
     {
         variants: {
             active: {
-                true: 'bg-blue-600 hover:bg-blue-700 border-transparent',
+                true: 'bg-blue-600 hover:bg-blue-700 border-transparent text-white',
                 // false: 'bg-black/10 hover:bg-black/15 dark:bg-white/10 hover:dark:bg-white/15',
                 false: 'border hover:bg-black/5 hover:dark:bg-white/5',
             },
