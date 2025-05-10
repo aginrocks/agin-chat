@@ -8,6 +8,9 @@
   "permissions": [
     "core:default",
     "opener:default",
-    "opener:default"
+    "opener:default",
+    "opener:allow-open-url",
+    "oauth:allow-start",
+    "oauth:allow-cancel"
   ]
 }

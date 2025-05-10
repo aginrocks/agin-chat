@@ -6,6 +6,7 @@ export type LoginStage = 'select_homeserver' | 'loading' | 'error' | 'login';
 
 export type LoginDetails = {
     homeserver: string;
+    homeserver_base_url?: string;
     username: string;
     password: string;
 };

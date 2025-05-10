@@ -14,8 +14,6 @@ export function Login() {
     const passwordFlowExists = flows.find((f) => f.type === 'm.login.password');
     const ssoFlowExists = flows.find((f) => f.type === 'm.login.sso');
 
-    const loginButtonVisible = passwordFlowExists && flows.length === 1;
-
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4">

@@ -23,6 +23,7 @@ export function SelectHomeserver() {
         if (result['m.homeserver'].state === AutoDiscoveryAction.SUCCESS) {
             setStage('login');
             setFlows(loginFlows?.flows ?? []);
+            form.setFieldValue('homeserver_base_url', result['m.homeserver'].base_url ?? '');
         } else {
             const message = result['m.homeserver'].error?.toString();
             setStage('error');
