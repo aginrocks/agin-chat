@@ -10,11 +10,11 @@ fn greet(name: &str) -> String {
 #[tauri::command]
 fn start_oauth(window: tauri::Window) -> Result<u16, String> {
     let config = OauthConfig {
-        response: Some("test".into()),
+        response: Some(include_str!("../resources/oauth.html").into()),
         ..Default::default()
     };
     let port = tauri_plugin_oauth::start_with_config(config, move |url| {
-        window.emit("redirect_uri", url).map_err(|e| e.to_string());
+        window.emit("redirect_url", url).map_err(|e| e.to_string());
     })
     .unwrap();
     Ok(port)
