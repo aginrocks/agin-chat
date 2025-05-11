@@ -5,3 +5,4 @@ export * from './useLogin';
 export * from './useAccounts';
 export * from './useAccount';
 export * from './useSetTitle';
+export * from './useVerificationRequest';

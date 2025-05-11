@@ -9,6 +9,7 @@ import { TooltipProvider } from '@components/ui/tooltip';
 import { DevTools } from 'jotai-devtools';
 import { useState } from 'react';
 import 'jotai-devtools/styles.css';
+import { AtomsBindProvider } from '@lib/providers/AtomsBind';
 // import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
 export const Route = createRootRoute({
@@ -24,7 +25,9 @@ export const Route = createRootRoute({
                     <AccountsProvider>
                         <MatrixClientProvider>
                             <ModalsManagerProvider>
-                                <Outlet />
+                                <AtomsBindProvider>
+                                    <Outlet />
+                                </AtomsBindProvider>
                             </ModalsManagerProvider>
                         </MatrixClientProvider>
                     </AccountsProvider>

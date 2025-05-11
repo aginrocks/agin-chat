@@ -1,7 +1,14 @@
 import { useCallback, useState } from 'react';
-import { ModalName, ModalPayload, ModalReturnValue, ModalStore, ModalStoreItem } from './types';
+import {
+    ModalName,
+    ModalPayload,
+    ModalProps,
+    ModalReturnValue,
+    ModalStore,
+    ModalStoreItem,
+} from './types';
 import { ModalsContext } from './contexts';
-import { ModalsBinding } from './modals';
+import { Modals, ModalsBinding } from './modals';
 
 export type ModalsManagerProps = {
     children?: React.ReactNode;
@@ -45,7 +52,13 @@ export function ModalsManagerProvider({ children }: ModalsManagerProps) {
                         }
                         newModals[modalName].state = 'closing';
                     }
-                    requestAnimationFrame(() => newModals[modalName]?.resolve(payload));
+                    requestAnimationFrame(() => {
+                        (
+                            newModals[modalName]?.resolve as (
+                                value: ModalReturnValue<T> | undefined
+                            ) => void
+                        )(payload);
+                    });
                     return newModals;
                 });
                 setTimeout(() => {
@@ -63,7 +76,7 @@ export function ModalsManagerProvider({ children }: ModalsManagerProps) {
     return (
         <ModalsContext.Provider value={{ show, hide }}>
             {Object.values(modals).map((m) => {
-                const ModalComponent = ModalsBinding[m.name];
+                const ModalComponent = ModalsBinding[m.name] as React.FC<ModalProps<typeof m.name>>;
 
                 return (
                     <ModalComponent
