@@ -1,6 +1,9 @@
 import { Button } from '@components/ui/button';
+import { DirectRoomItem } from '@components/ui/direct-room';
 import { Header } from '@components/ui/header';
+import { RoomItem } from '@components/ui/room';
 import { SecondarySidebarWrapper } from '@components/ui/secondary-sidebar';
+import { SidebarList } from '@components/ui/secondary-sidebar/SidebarList';
 import { DirectsAtom, RoomsAtom } from '@lib/atoms';
 import { useSetTitle } from '@lib/hooks';
 import { IconPlus, IconUsers } from '@tabler/icons-react';
@@ -31,7 +34,11 @@ function RouteComponent() {
                                 <IconPlus />
                             </Button>
                         }
-                    ></Header>
+                    />
+                    {/* <SidebarList>
+                        <RoomItem />
+                        <RoomItem active />
+                    </SidebarList> */}
                 </>
             }
         >

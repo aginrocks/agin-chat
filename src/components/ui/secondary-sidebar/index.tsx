@@ -5,7 +5,7 @@ export type SecondarySidebarProps = {
 };
 
 export function SecondarySidebar({ children }: SecondarySidebarProps) {
-    return <div className="flex flex-col h-full w-65">{children}</div>;
+    return <div className="flex flex-col h-full max-h-full w-65">{children}</div>;
 }
 
 export * from './wrapper';
