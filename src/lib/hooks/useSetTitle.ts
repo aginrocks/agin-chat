@@ -1,9 +1,9 @@
-import { Title } from '@lib/providers/Title';
-import { useTitle } from './useTitle';
+import { Title, TitleAtom } from '@lib/atoms';
 import { useEffect } from 'react';
+import { useSetAtom } from 'jotai';
 
 export function useSetTitle(title: Title) {
-    const [, setTitle] = useTitle();
+    const setTitle = useSetAtom(TitleAtom);
 
     useEffect(() => {
         setTitle(title);

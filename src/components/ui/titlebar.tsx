@@ -1,7 +1,8 @@
-import { useTitle } from '@lib/hooks';
+import { TitleAtom } from '@lib/atoms';
+import { useAtomValue } from 'jotai';
 
 export function Titlebar() {
-    const [title] = useTitle();
+    const title = useAtomValue(TitleAtom);
     return (
         <div
             data-tauri-drag-region

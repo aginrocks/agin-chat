@@ -4,7 +4,6 @@ import { ThemeProvider } from '@components/theme-provider';
 import { MatrixClientProvider } from '@lib/providers/MatrixClient';
 import { ModalsManagerProvider } from '@lib/modals';
 import { AccountsProvider } from '@lib/providers/Accounts';
-import { TitleProvider } from '@lib/providers/Title';
 import { TooltipProvider } from '@components/ui/tooltip';
 
 export const Route = createRootRoute({
@@ -14,9 +13,7 @@ export const Route = createRootRoute({
                 <AccountsProvider>
                     <MatrixClientProvider>
                         <ModalsManagerProvider>
-                            <TitleProvider>
-                                <Outlet />
-                            </TitleProvider>
+                            <Outlet />
                         </ModalsManagerProvider>
                     </MatrixClientProvider>
                 </AccountsProvider>
