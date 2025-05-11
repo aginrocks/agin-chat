@@ -69,10 +69,12 @@ export const useVerifierCancel = (
 };
 
 export const useVerifierShowSas = (
-    verifier: Verifier,
+    verifier: Verifier | undefined,
     onCallback: VerifierEventHandlerMap[VerifierEvent.ShowSas]
 ) => {
     useEffect(() => {
+        if (!verifier) return;
+
         verifier.on(VerifierEvent.ShowSas, onCallback);
         return () => {
             verifier.removeListener(VerifierEvent.ShowSas, onCallback);

@@ -6,6 +6,7 @@ import { atom, useAtom } from 'jotai';
 import { VerificationPhase, VerificationRequest } from 'matrix-js-sdk/lib/crypto-api';
 import { useCallback, useEffect, useState } from 'react';
 import { toast as sonnerToast } from 'sonner';
+import { VerificationMethod } from 'matrix-js-sdk/lib/types';
 
 export const VerificationRequestAtom = atom<VerificationRequest>();
 
@@ -37,8 +38,9 @@ export function useBindVerificationRequest() {
                     icon: IconShield,
                     action: {
                         label: 'Verify',
-                        onClick: () => {
+                        onClick: async () => {
                             request.accept();
+                            await request.startVerification(VerificationMethod.Sas);
                             modals.show('VerifySession');
                         },
                     },

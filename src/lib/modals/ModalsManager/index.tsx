@@ -8,7 +8,7 @@ import {
     ModalStoreItem,
 } from './types';
 import { ModalsContext } from './contexts';
-import { Modals, ModalsBinding } from './modals';
+import { ModalsBinding } from './modals';
 
 export type ModalsManagerProps = {
     children?: React.ReactNode;
