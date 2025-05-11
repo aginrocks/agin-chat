@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@tanstack/react-router';
 import { SidebarItem } from './SidebarItem';
-import { IconHash, IconSettings, IconUsers } from '@tabler/icons-react';
+import { IconHash, IconPlus, IconSettings, IconUsers } from '@tabler/icons-react';
 import { SidebarSeparator } from './SidebarSeparator';
 
 export function PrimarySidebar() {
@@ -21,6 +21,7 @@ export function PrimarySidebar() {
                     <SidebarItem icon={IconHash} label="Rooms" active={tab === 'rooms'} />
                 </Link>
                 <SidebarSeparator />
+                <SidebarItem icon={IconPlus} label="Create a Space" />
             </div>
             <div className="flex flex-col gap-2.5">
                 <SidebarItem icon={IconSettings} label="Settings" />
