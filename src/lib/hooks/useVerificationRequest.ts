@@ -29,10 +29,11 @@ export function useVerificationRequestReceived(
 }
 
 export const useVerificationRequestChange = (
-    request: VerificationRequest,
+    request: VerificationRequest | undefined,
     onChange: VerificationRequestEventHandlerMap[VerificationRequestEvent.Change]
 ) => {
     useEffect(() => {
+        if (!request) return;
         request.on(VerificationRequestEvent.Change, onChange);
         return () => {
             request.removeListener(VerificationRequestEvent.Change, onChange);
@@ -40,13 +41,15 @@ export const useVerificationRequestChange = (
     }, [request, onChange]);
 };
 
-export const useVerificationRequestPhase = (request: VerificationRequest): VerificationPhase => {
-    const [phase, setPhase] = useState(() => request.phase);
+export const useVerificationRequestPhase = (
+    request: VerificationRequest | undefined
+): VerificationPhase | undefined => {
+    const [phase, setPhase] = useState(() => request?.phase);
 
     useVerificationRequestChange(
         request,
         useCallback(() => {
-            setPhase(request.phase);
+            setPhase(request?.phase);
         }, [request])
     );
 
