@@ -12,6 +12,7 @@ const themedIconVariants = cva('w-12 h-12 rounded-[99999px] flex justify-center 
         color: {
             red: 'bg-red-600/20',
             blue: 'bg-blue-600/20',
+            green: 'bg-green-600/20',
         },
     },
 });
@@ -21,6 +22,7 @@ const themedIconIconVariants = cva('', {
         color: {
             red: 'text-red-400',
             blue: 'text-blue-400',
+            green: 'text-green-400',
         },
     },
 });

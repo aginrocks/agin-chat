@@ -5,12 +5,15 @@ import { AccountsContext } from '../providers/Accounts';
 import { useNavigate } from '@tanstack/react-router';
 import { useAccount } from './useAccount';
 import { useModals } from '@lib/modals';
+import { useSetAtom } from 'jotai';
+import { AppLoadingAtom } from '@lib/atoms';
 
 export function useLogin() {
     const [, setAccounts] = useContext(AccountsContext);
     const [, setAccount] = useAccount();
     const modals = useModals();
     const navigate = useNavigate();
+    const setAppLoading = useSetAtom(AppLoadingAtom);
 
     const loginAndSave = useCallback(async (baseUrl: string, data: LoginRequest) => {
         const mx = createClient({
@@ -34,8 +37,12 @@ export function useLogin() {
 
         mx.stopClient();
 
-        navigate({ to: '/app/home' });
-        modals.hide('AddAccount');
+        setAppLoading(true);
+
+        setTimeout(() => {
+            navigate({ to: '/app/direct' });
+            modals.hide('AddAccount');
+        }, 500);
 
         return result;
     }, []);

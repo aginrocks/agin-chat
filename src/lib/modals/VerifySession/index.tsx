@@ -7,13 +7,14 @@ import {
 } from '@components/ui/dialog';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { ModalProps } from '../ModalsManager';
-import { CompareEmojiView } from './CompareEmojiView';
 import { useState } from 'react';
-import { ShowSasCallbacks } from 'matrix-js-sdk/lib/crypto-api';
-import { useVerifierShowSas } from '@lib/hooks';
+import { ShowSasCallbacks, VerificationPhase } from 'matrix-js-sdk/lib/crypto-api';
+import { useVerificationRequestPhase, useVerifierShowSas } from '@lib/hooks';
 import { useAtomValue } from 'jotai';
 import { VerificationRequestAtom } from '@lib/atoms';
-import { Button } from '@components/ui/button';
+import { SasVerification } from './SasVerification';
+import { Done } from './Done';
+import { Canceled } from './Canceled';
 
 export function VerifySession({
     payload,
@@ -24,28 +25,14 @@ export function VerifySession({
 
     useVerifierShowSas(request?.verifier, setSasData);
 
+    const phase = useVerificationRequestPhase(request);
+
     return (
         <Dialog {...props}>
             <DialogContent className="w-md">
-                <DialogHeader>
-                    <DialogTitle>Device Verification</DialogTitle>
-                    <DialogDescription>
-                        Confirm the emoji below are displayed on both devices, in the same order:
-                    </DialogDescription>
-                </DialogHeader>
-                {sasData && <CompareEmojiView sasData={sasData} />}
-                <div className="flex flex-col gap-3">
-                    <Button disabled={!sasData} onClick={() => sasData?.confirm()}>
-                        They match
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        disabled={!sasData}
-                        onClick={() => sasData?.mismatch()}
-                    >
-                        They don't match
-                    </Button>
-                </div>
+                {phase === VerificationPhase.Started && <SasVerification sasData={sasData} />}
+                {phase === VerificationPhase.Done && <Done />}
+                {phase === VerificationPhase.Cancelled && <Canceled />}
             </DialogContent>
         </Dialog>
     );

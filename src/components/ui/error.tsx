@@ -1,18 +1,19 @@
 import { Icon, IconX } from '@tabler/icons-react';
-import { ThemedIcon } from './themed-icon';
+import { ThemedIcon, ThemedIconProps } from './themed-icon';
 
 export type ErrorProps = {
     icon?: Icon;
     title?: string;
     description?: string;
     children?: React.ReactNode;
+    color?: ThemedIconProps['color'];
 };
 
-export function ErrorMessage({ icon, title, description, children }: ErrorProps) {
+export function ErrorMessage({ icon, title, description, color = 'red', children }: ErrorProps) {
     const Icon = icon || IconX;
     return (
         <div className="flex flex-col justify-center items-center text-center pb-0.5">
-            <ThemedIcon icon={Icon} color="red" />
+            <ThemedIcon icon={Icon} color={color} />
             <div className="mt-2 mb-1">
                 <div className="font-semibold text-md mb-0.5">{title}</div>
                 <div className="text-xs text-muted-foreground">{description}</div>

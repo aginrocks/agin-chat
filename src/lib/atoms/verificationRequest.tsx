@@ -39,7 +39,7 @@ export function useBindVerificationRequest() {
                     action: {
                         label: 'Verify',
                         onClick: async () => {
-                            request.accept();
+                            await request.accept();
                             await request.startVerification(VerificationMethod.Sas);
                             modals.show('VerifySession');
                         },
