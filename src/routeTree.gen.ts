@@ -19,6 +19,7 @@ import { Route as AppDirectRouteImport } from './routes/app/direct/route'
 import { Route as AppRoomsIndexImport } from './routes/app/rooms/index'
 import { Route as AppDirectIndexImport } from './routes/app/direct/index'
 import { Route as AppRoomsRoomIdImport } from './routes/app/rooms/$roomId'
+import { Route as AppDirectRoomIdImport } from './routes/app/direct/$roomId'
 
 // Create/Update Routes
 
@@ -70,6 +71,12 @@ const AppRoomsRoomIdRoute = AppRoomsRoomIdImport.update({
   getParentRoute: () => AppRoomsRouteRoute,
 } as any)
 
+const AppDirectRoomIdRoute = AppDirectRoomIdImport.update({
+  id: '/$roomId',
+  path: '/$roomId',
+  getParentRoute: () => AppDirectRouteRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -109,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppRoomsRouteImport
       parentRoute: typeof AppRouteImport
     }
+    '/app/direct/$roomId': {
+      id: '/app/direct/$roomId'
+      path: '/$roomId'
+      fullPath: '/app/direct/$roomId'
+      preLoaderRoute: typeof AppDirectRoomIdImport
+      parentRoute: typeof AppDirectRouteImport
+    }
     '/app/rooms/$roomId': {
       id: '/app/rooms/$roomId'
       path: '/$roomId'
@@ -136,10 +150,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AppDirectRouteRouteChildren {
+  AppDirectRoomIdRoute: typeof AppDirectRoomIdRoute
   AppDirectIndexRoute: typeof AppDirectIndexRoute
 }
 
 const AppDirectRouteRouteChildren: AppDirectRouteRouteChildren = {
+  AppDirectRoomIdRoute: AppDirectRoomIdRoute,
   AppDirectIndexRoute: AppDirectIndexRoute,
 }
 
@@ -181,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/welcome': typeof WelcomeRoute
   '/app/direct': typeof AppDirectRouteRouteWithChildren
   '/app/rooms': typeof AppRoomsRouteRouteWithChildren
+  '/app/direct/$roomId': typeof AppDirectRoomIdRoute
   '/app/rooms/$roomId': typeof AppRoomsRoomIdRoute
   '/app/direct/': typeof AppDirectIndexRoute
   '/app/rooms/': typeof AppRoomsIndexRoute
@@ -190,6 +207,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/welcome': typeof WelcomeRoute
+  '/app/direct/$roomId': typeof AppDirectRoomIdRoute
   '/app/rooms/$roomId': typeof AppRoomsRoomIdRoute
   '/app/direct': typeof AppDirectIndexRoute
   '/app/rooms': typeof AppRoomsIndexRoute
@@ -202,6 +220,7 @@ export interface FileRoutesById {
   '/welcome': typeof WelcomeRoute
   '/app/direct': typeof AppDirectRouteRouteWithChildren
   '/app/rooms': typeof AppRoomsRouteRouteWithChildren
+  '/app/direct/$roomId': typeof AppDirectRoomIdRoute
   '/app/rooms/$roomId': typeof AppRoomsRoomIdRoute
   '/app/direct/': typeof AppDirectIndexRoute
   '/app/rooms/': typeof AppRoomsIndexRoute
@@ -215,6 +234,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/app/direct'
     | '/app/rooms'
+    | '/app/direct/$roomId'
     | '/app/rooms/$roomId'
     | '/app/direct/'
     | '/app/rooms/'
@@ -223,6 +243,7 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/welcome'
+    | '/app/direct/$roomId'
     | '/app/rooms/$roomId'
     | '/app/direct'
     | '/app/rooms'
@@ -233,6 +254,7 @@ export interface FileRouteTypes {
     | '/welcome'
     | '/app/direct'
     | '/app/rooms'
+    | '/app/direct/$roomId'
     | '/app/rooms/$roomId'
     | '/app/direct/'
     | '/app/rooms/'
@@ -283,6 +305,7 @@ export const routeTree = rootRoute
       "filePath": "app/direct/route.tsx",
       "parent": "/app",
       "children": [
+        "/app/direct/$roomId",
         "/app/direct/"
       ]
     },
@@ -293,6 +316,10 @@ export const routeTree = rootRoute
         "/app/rooms/$roomId",
         "/app/rooms/"
       ]
+    },
+    "/app/direct/$roomId": {
+      "filePath": "app/direct/$roomId.tsx",
+      "parent": "/app/direct"
     },
     "/app/rooms/$roomId": {
       "filePath": "app/rooms/$roomId.tsx",
