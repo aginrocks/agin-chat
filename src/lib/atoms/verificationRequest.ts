@@ -46,9 +46,8 @@ export function useBindVerificationRequest() {
                     },
                     cancel: {
                         label: 'Ignore',
-                        onClick: () => {
-                            request.cancel();
-                            // TODO: ignore the request
+                        onClick: async () => {
+                            await request.cancel();
                         },
                     },
                     options: {
@@ -56,7 +55,6 @@ export function useBindVerificationRequest() {
                     },
                 });
                 setToastId(toastId);
-                // if (request) modals.show('VerifySession');
             },
             [setRequest]
         )
