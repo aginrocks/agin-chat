@@ -1,3 +1,5 @@
+import { EmptyState } from '@components/ui/empty-state';
+import { IconHash } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/app/rooms/')({
@@ -5,5 +7,11 @@ export const Route = createFileRoute('/app/rooms/')({
 });
 
 function RouteComponent() {
-    return <div></div>;
+    return (
+        <EmptyState
+            icon={IconHash}
+            title="No Rooms"
+            description="Create or join a public room to get started."
+        />
+    );
 }

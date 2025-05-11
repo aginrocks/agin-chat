@@ -1,3 +1,5 @@
+import { EmptyState } from '@components/ui/empty-state';
+import { IconUsers } from '@tabler/icons-react';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/app/direct/')({
@@ -5,5 +7,11 @@ export const Route = createFileRoute('/app/direct/')({
 });
 
 function RouteComponent() {
-    return <div></div>;
+    return (
+        <EmptyState
+            icon={IconUsers}
+            title="No Direct Messages"
+            description="Use the plus icon to start a new conversation."
+        />
+    );
 }
