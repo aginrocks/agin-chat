@@ -14,8 +14,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as WelcomeImport } from './routes/welcome'
 import { Route as AppRouteImport } from './routes/app/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as AppRoomsImport } from './routes/app/rooms'
-import { Route as AppDirectImport } from './routes/app/direct'
+import { Route as AppRoomsRouteImport } from './routes/app/rooms/route'
+import { Route as AppDirectRouteImport } from './routes/app/direct/route'
+import { Route as AppRoomsIndexImport } from './routes/app/rooms/index'
+import { Route as AppDirectIndexImport } from './routes/app/direct/index'
 
 // Create/Update Routes
 
@@ -37,16 +39,28 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AppRoomsRoute = AppRoomsImport.update({
+const AppRoomsRouteRoute = AppRoomsRouteImport.update({
   id: '/rooms',
   path: '/rooms',
   getParentRoute: () => AppRouteRoute,
 } as any)
 
-const AppDirectRoute = AppDirectImport.update({
+const AppDirectRouteRoute = AppDirectRouteImport.update({
   id: '/direct',
   path: '/direct',
   getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppRoomsIndexRoute = AppRoomsIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoomsRouteRoute,
+} as any)
+
+const AppDirectIndexRoute = AppDirectIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppDirectRouteRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -78,29 +92,67 @@ declare module '@tanstack/react-router' {
       id: '/app/direct'
       path: '/direct'
       fullPath: '/app/direct'
-      preLoaderRoute: typeof AppDirectImport
+      preLoaderRoute: typeof AppDirectRouteImport
       parentRoute: typeof AppRouteImport
     }
     '/app/rooms': {
       id: '/app/rooms'
       path: '/rooms'
       fullPath: '/app/rooms'
-      preLoaderRoute: typeof AppRoomsImport
+      preLoaderRoute: typeof AppRoomsRouteImport
       parentRoute: typeof AppRouteImport
+    }
+    '/app/direct/': {
+      id: '/app/direct/'
+      path: '/'
+      fullPath: '/app/direct/'
+      preLoaderRoute: typeof AppDirectIndexImport
+      parentRoute: typeof AppDirectRouteImport
+    }
+    '/app/rooms/': {
+      id: '/app/rooms/'
+      path: '/'
+      fullPath: '/app/rooms/'
+      preLoaderRoute: typeof AppRoomsIndexImport
+      parentRoute: typeof AppRoomsRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface AppDirectRouteRouteChildren {
+  AppDirectIndexRoute: typeof AppDirectIndexRoute
+}
+
+const AppDirectRouteRouteChildren: AppDirectRouteRouteChildren = {
+  AppDirectIndexRoute: AppDirectIndexRoute,
+}
+
+const AppDirectRouteRouteWithChildren = AppDirectRouteRoute._addFileChildren(
+  AppDirectRouteRouteChildren,
+)
+
+interface AppRoomsRouteRouteChildren {
+  AppRoomsIndexRoute: typeof AppRoomsIndexRoute
+}
+
+const AppRoomsRouteRouteChildren: AppRoomsRouteRouteChildren = {
+  AppRoomsIndexRoute: AppRoomsIndexRoute,
+}
+
+const AppRoomsRouteRouteWithChildren = AppRoomsRouteRoute._addFileChildren(
+  AppRoomsRouteRouteChildren,
+)
+
 interface AppRouteRouteChildren {
-  AppDirectRoute: typeof AppDirectRoute
-  AppRoomsRoute: typeof AppRoomsRoute
+  AppDirectRouteRoute: typeof AppDirectRouteRouteWithChildren
+  AppRoomsRouteRoute: typeof AppRoomsRouteRouteWithChildren
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
-  AppDirectRoute: AppDirectRoute,
-  AppRoomsRoute: AppRoomsRoute,
+  AppDirectRouteRoute: AppDirectRouteRouteWithChildren,
+  AppRoomsRouteRoute: AppRoomsRouteRouteWithChildren,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -111,16 +163,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/welcome': typeof WelcomeRoute
-  '/app/direct': typeof AppDirectRoute
-  '/app/rooms': typeof AppRoomsRoute
+  '/app/direct': typeof AppDirectRouteRouteWithChildren
+  '/app/rooms': typeof AppRoomsRouteRouteWithChildren
+  '/app/direct/': typeof AppDirectIndexRoute
+  '/app/rooms/': typeof AppRoomsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/welcome': typeof WelcomeRoute
-  '/app/direct': typeof AppDirectRoute
-  '/app/rooms': typeof AppRoomsRoute
+  '/app/direct': typeof AppDirectIndexRoute
+  '/app/rooms': typeof AppRoomsIndexRoute
 }
 
 export interface FileRoutesById {
@@ -128,16 +182,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
   '/welcome': typeof WelcomeRoute
-  '/app/direct': typeof AppDirectRoute
-  '/app/rooms': typeof AppRoomsRoute
+  '/app/direct': typeof AppDirectRouteRouteWithChildren
+  '/app/rooms': typeof AppRoomsRouteRouteWithChildren
+  '/app/direct/': typeof AppDirectIndexRoute
+  '/app/rooms/': typeof AppRoomsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/welcome' | '/app/direct' | '/app/rooms'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/welcome'
+    | '/app/direct'
+    | '/app/rooms'
+    | '/app/direct/'
+    | '/app/rooms/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/app' | '/welcome' | '/app/direct' | '/app/rooms'
-  id: '__root__' | '/' | '/app' | '/welcome' | '/app/direct' | '/app/rooms'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/welcome'
+    | '/app/direct'
+    | '/app/rooms'
+    | '/app/direct/'
+    | '/app/rooms/'
   fileRoutesById: FileRoutesById
 }
 
@@ -182,12 +253,26 @@ export const routeTree = rootRoute
       "filePath": "welcome.tsx"
     },
     "/app/direct": {
-      "filePath": "app/direct.tsx",
-      "parent": "/app"
+      "filePath": "app/direct/route.tsx",
+      "parent": "/app",
+      "children": [
+        "/app/direct/"
+      ]
     },
     "/app/rooms": {
-      "filePath": "app/rooms.tsx",
-      "parent": "/app"
+      "filePath": "app/rooms/route.tsx",
+      "parent": "/app",
+      "children": [
+        "/app/rooms/"
+      ]
+    },
+    "/app/direct/": {
+      "filePath": "app/direct/index.tsx",
+      "parent": "/app/direct"
+    },
+    "/app/rooms/": {
+      "filePath": "app/rooms/index.tsx",
+      "parent": "/app/rooms"
     }
   }
 }
