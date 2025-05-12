@@ -37,7 +37,7 @@ export function Setting({ title, description, type, position, options }: Setting
     return (
         <div
             className={cn(
-                'flex justify-between items-center p-3 pl-3.5 rounded-md bg-light-background',
+                'flex justify-between items-center p-3 pl-3.5 rounded-md bg-secondary',
                 settingVariants({ position })
             )}
         >
