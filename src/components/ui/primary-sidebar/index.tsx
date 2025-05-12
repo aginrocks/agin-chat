@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@tanstack/react-router';
 import { SidebarItem } from './SidebarItem';
-import { IconHash, IconPlus, IconSettings, IconUsers } from '@tabler/icons-react';
+import { IconHash, IconPlus, IconSettings, IconShield, IconUsers } from '@tabler/icons-react';
 import { SidebarSeparator } from './SidebarSeparator';
 import { useModals } from '@lib/modals';
 
@@ -27,6 +27,11 @@ export function PrimarySidebar() {
                 <SidebarItem icon={IconPlus} label="Create a Space" />
             </div>
             <div className="flex flex-col gap-2.5">
+                <SidebarItem
+                    icon={IconShield}
+                    label="Unverified Devices"
+                    onClick={() => modals.show('Settings', { initialTab: 'devices' })}
+                />
                 <SidebarItem
                     icon={IconSettings}
                     label="Settings"

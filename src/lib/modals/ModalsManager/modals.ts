@@ -1,5 +1,5 @@
 import { AddAccount } from '../AddAccount';
-import { Settings } from '../Settings';
+import { Settings, SettingsTabName } from '../Settings';
 import { VerifySession } from '../VerifySession';
 import { ModalComponentBindings, ModalDefinition } from './types';
 
@@ -16,7 +16,7 @@ export type Modals = {
     }>;
     Settings: ModalDefinition<{
         payload: {
-            initialTab?: string;
+            initialTab?: SettingsTabName;
         };
         returnValue: undefined;
     }>;
