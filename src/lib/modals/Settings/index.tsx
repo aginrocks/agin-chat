@@ -1,8 +1,7 @@
 import { Dialog, DialogContent } from '@components/ui/dialog';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { ModalProps } from '../ModalsManager';
-import { SettingsSidebar } from './Sidebar';
-import { SidebarTab, SidebarTabProps } from './SidebarTab';
+import { SettingsSidebar, SidebarTab, SidebarTabProps } from '@components/settings';
 import {
     IconBell,
     IconBrush,
