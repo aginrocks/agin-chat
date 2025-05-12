@@ -12,6 +12,8 @@ import {
     IconUsers,
 } from '@tabler/icons-react';
 import { useState } from 'react';
+import { SettingsPage } from '@components/settings/settings-page';
+import { Appearance } from './Appearance';
 
 export type SettingsTabName =
     | 'accounts'
@@ -82,6 +84,7 @@ export function Settings({
                             />
                         ))}
                     </SettingsSidebar>
+                    <SettingsPage>{tab === 'appearance' && <Appearance />}</SettingsPage>
                 </div>
             </DialogContent>
         </Dialog>
