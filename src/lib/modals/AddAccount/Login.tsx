@@ -1,11 +1,7 @@
 import { useContext } from 'react';
 import { FlowsContext, StageContext } from './contexts';
 import { Button } from '@components/ui/button';
-import { IconArrowRight } from '@tabler/icons-react';
 import { PasswordFlow, SSOFlow } from './flows';
-import { Separator } from '@components/ui/separator';
-import clsx from 'clsx';
-import { cn } from '@lib/utils';
 import { OrSeparator } from '@components/ui/or-separator';
 
 export function Login() {

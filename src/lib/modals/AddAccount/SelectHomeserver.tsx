@@ -7,6 +7,7 @@ import { IconArrowRight } from '@tabler/icons-react';
 import { discoverHomeserver } from './discoverHomeserver';
 import { AutoDiscoveryAction } from 'matrix-js-sdk';
 import { APP_NAME } from '@lib/constants/names';
+import { getHotkeyHandler } from '@mantine/hooks';
 
 export function SelectHomeserver() {
     const form = useContext(FormContext);
@@ -45,7 +46,11 @@ export function SelectHomeserver() {
         <>
             <div className="flex flex-col gap-1.5">
                 <Label className="text-sm">Homeserver</Label>
-                <Input placeholder="matrix.org" {...form?.getInputProps('homeserver')} />
+                <Input
+                    placeholder="matrix.org"
+                    onKeyDown={getHotkeyHandler([['Enter', discoverServer]])}
+                    {...form?.getInputProps('homeserver')}
+                />
             </div>
             <div className="flex justify-end">
                 <Button className="w-20" onClick={discoverServer}>
