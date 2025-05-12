@@ -14,7 +14,7 @@ const itemVariants = cva(
     {
         variants: {
             active: {
-                true: 'bg-blue-600 hover:bg-blue-700 border-transparent text-white',
+                true: 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent',
                 // false: 'bg-black/10 hover:bg-black/15 dark:bg-white/10 hover:dark:bg-white/15',
                 false: 'border hover:bg-black/5 hover:dark:bg-white/5',
             },
