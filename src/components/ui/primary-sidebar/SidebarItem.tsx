@@ -3,10 +3,11 @@ import { Icon } from '@tabler/icons-react';
 import { cva, VariantProps } from 'class-variance-authority';
 import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip';
 
-type SidebarItemProps = VariantProps<typeof itemVariants> & {
-    icon?: Icon;
-    label: string;
-};
+type SidebarItemProps = VariantProps<typeof itemVariants> &
+    React.ComponentProps<'div'> & {
+        icon?: Icon;
+        label: string;
+    };
 
 const itemVariants = cva(
     'flex justify-center items-center rounded-lg w-10 h-10 cursor-pointer border transition',
@@ -21,11 +22,13 @@ const itemVariants = cva(
     }
 );
 
-export function SidebarItem({ icon: Icon, label, active = false }: SidebarItemProps) {
+export function SidebarItem({ icon: Icon, label, active = false, ...props }: SidebarItemProps) {
     return (
         <Tooltip>
             <TooltipTrigger asChild>
-                <div className={cn(itemVariants({ active }))}>{Icon && <Icon size={18} />}</div>
+                <div className={cn(itemVariants({ active }))} {...props}>
+                    {Icon && <Icon size={18} />}
+                </div>
             </TooltipTrigger>
             <TooltipContent side="right">
                 <p>{label}</p>

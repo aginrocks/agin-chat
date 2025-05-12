@@ -5,7 +5,7 @@ import { PasswordFlow, SSOFlow } from './flows';
 import { OrSeparator } from '@components/ui/or-separator';
 
 export function Login() {
-    const [stage, setStage] = useContext(StageContext);
+    const [, setStage] = useContext(StageContext);
     const [flows] = useContext(FlowsContext);
     const passwordFlowExists = flows.find((f) => f.type === 'm.login.password');
     const ssoFlowExists = flows.find((f) => f.type === 'm.login.sso');

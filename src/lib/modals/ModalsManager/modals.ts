@@ -1,4 +1,5 @@
 import { AddAccount } from '../AddAccount';
+import { Settings } from '../Settings';
 import { VerifySession } from '../VerifySession';
 import { ModalComponentBindings, ModalDefinition } from './types';
 
@@ -13,9 +14,16 @@ export type Modals = {
         payload: undefined;
         returnValue: undefined;
     }>;
+    Settings: ModalDefinition<{
+        payload: {
+            initialTab?: string;
+        };
+        returnValue: undefined;
+    }>;
 };
 
 export const ModalsBinding: ModalComponentBindings = {
     AddAccount: AddAccount,
     VerifySession: VerifySession,
+    Settings: Settings,
 };

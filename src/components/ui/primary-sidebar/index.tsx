@@ -2,10 +2,13 @@ import { Link, useLocation } from '@tanstack/react-router';
 import { SidebarItem } from './SidebarItem';
 import { IconHash, IconPlus, IconSettings, IconUsers } from '@tabler/icons-react';
 import { SidebarSeparator } from './SidebarSeparator';
+import { useModals } from '@lib/modals';
 
 export function PrimarySidebar() {
     const { pathname } = useLocation();
     const tab = pathname.split('/')[2];
+
+    const modals = useModals();
 
     return (
         <div className="flex flex-col justify-between p-3.5 pt-0 h-full">
@@ -24,7 +27,11 @@ export function PrimarySidebar() {
                 <SidebarItem icon={IconPlus} label="Create a Space" />
             </div>
             <div className="flex flex-col gap-2.5">
-                <SidebarItem icon={IconSettings} label="Settings" />
+                <SidebarItem
+                    icon={IconSettings}
+                    label="Settings"
+                    onClick={() => modals.show('Settings')}
+                />
             </div>
         </div>
     );
