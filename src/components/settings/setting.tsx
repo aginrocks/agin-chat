@@ -1,4 +1,3 @@
-import { Button } from '@components/ui/button';
 import {
     Select,
     SelectContent,
@@ -6,6 +5,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@components/ui/select';
+import { Switch } from '@components/ui/switch';
 import { cn } from '@lib/utils';
 import { cva } from 'class-variance-authority';
 
@@ -21,7 +21,7 @@ export type SettingProps = {
     description?: string;
     position?: SettingPosition;
     options?: SettingOption[];
-} & ({ type: 'select'; options: SettingOption[] } | { type: 'switch' | 'custom' });
+} & ({ type: 'select'; options: SettingOption[] } | { type: 'switch' | 'custom'; options?: never });
 
 const settingVariants = cva('rounded-md', {
     variants: {
@@ -60,6 +60,7 @@ export function Setting({ title, description, type, position, options }: Setting
                         </SelectContent>
                     </Select>
                 )}
+                {type === 'switch' && <Switch />}
             </div>
         </div>
     );

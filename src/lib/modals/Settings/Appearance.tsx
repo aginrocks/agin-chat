@@ -23,6 +23,11 @@ export function Appearance() {
                         },
                     ]}
                 />
+                <Setting
+                    title="Theme"
+                    description="Choose between light and dark mode."
+                    type="switch"
+                />
             </SettingsGroup>
         </>
     );
