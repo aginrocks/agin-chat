@@ -1,4 +1,4 @@
-import { Header } from '@components/ui/header';
+import { RoomView } from '@components/chat';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/app/rooms/$roomId')({
@@ -9,7 +9,7 @@ function RouteComponent() {
     const { roomId } = Route.useParams();
     return (
         <div>
-            <Header title={roomId} />
+            <RoomView roomId={roomId} roomType="room" />
         </div>
     );
 }
