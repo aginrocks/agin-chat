@@ -1,26 +1,36 @@
 import { Button } from '@components/ui/button';
-import { IconCirclePlus, IconMoodSmile, IconGif, IconSend2 } from '@tabler/icons-react';
+import { IconMoodSmile, IconGif, IconSend2, IconSticker } from '@tabler/icons-react';
 import TextareaAutosize from 'react-textarea-autosize';
+import { AttachButton } from './attach-button';
+import { getHotkeyHandler } from '@mantine/hooks';
 
 export function MessageInput() {
+    // TODO: Fix icons hover state
     return (
-        <div className="border border-white/5 rounded-lg p-1 flex">
-            <Button variant="ghost" size="icon">
-                <IconCirclePlus />
-            </Button>
+        <div className="border border-white/5 rounded-lg flex bg-secondary-hover items-start">
+            <div className="p-1 pr-0">
+                <AttachButton />
+            </div>
             <TextareaAutosize
-                className="flex-1 focus:outline-none py-2 px-1.5 resize-none text-sm"
+                className="flex-1 focus:outline-none py-3 px-1.5 resize-none text-sm"
                 placeholder="Message Room Name"
+                onKeyDown={getHotkeyHandler([['Enter', (e) => e.preventDefault()]])}
+                maxRows={10}
             />
-            <Button variant="ghost" size="icon">
-                <IconGif />
-            </Button>
-            <Button variant="ghost" size="icon">
-                <IconMoodSmile />
-            </Button>
-            <Button variant="ghost" size="icon">
-                <IconSend2 />
-            </Button>
+            <div className="flex p-1 pl-0">
+                <Button variant="ghost" size="icon">
+                    <IconGif />
+                </Button>
+                <Button variant="ghost" size="icon">
+                    <IconSticker />
+                </Button>
+                <Button variant="ghost" size="icon">
+                    <IconMoodSmile />
+                </Button>
+                <Button variant="ghost" size="icon">
+                    <IconSend2 />
+                </Button>
+            </div>
         </div>
     );
 }
