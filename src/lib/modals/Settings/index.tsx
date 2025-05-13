@@ -14,6 +14,7 @@ import {
 import { useState } from 'react';
 import { SettingsPage } from '@components/settings/settings-page';
 import { Appearance } from './Appearance';
+import { Devices } from './Devices';
 
 export type SettingsTabName =
     | 'accounts'
@@ -84,7 +85,10 @@ export function Settings({
                             />
                         ))}
                     </SettingsSidebar>
-                    <SettingsPage>{tab === 'appearance' && <Appearance />}</SettingsPage>
+                    <SettingsPage>
+                        {tab === 'appearance' && <Appearance />}
+                        {tab === 'devices' && <Devices />}
+                    </SettingsPage>
                 </div>
             </DialogContent>
         </Dialog>
