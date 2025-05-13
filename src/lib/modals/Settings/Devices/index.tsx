@@ -28,6 +28,7 @@ export function Devices() {
                     data={{
                         displayName: 'Device',
                         verified: DeviceVerification.Unverified,
+                        deviceId: 'JQGEUMUYDW',
                     }}
                 />
                 <Device

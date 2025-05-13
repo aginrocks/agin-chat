@@ -27,7 +27,9 @@ export function Device({ data, position }: DeviceProps) {
             }
             position={position}
         >
-            {data.verified === DeviceVerification.Unverified && <VerificationAlert />}
+            {data.verified === DeviceVerification.Unverified && (
+                <VerificationAlert deviceId={data.deviceId} />
+            )}
         </Setting>
     );
 }

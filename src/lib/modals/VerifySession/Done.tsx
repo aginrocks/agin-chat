@@ -16,7 +16,7 @@ export function Done() {
                 color="green"
                 icon={IconCheck}
                 title="Verification complete"
-                description="Your device is now verified."
+                description="The device is now verified."
             />
             <Button onClick={() => modals.hide('VerifySession')}>Done</Button>
         </>

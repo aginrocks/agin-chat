@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { SettingsPage } from '@components/settings/settings-page';
 import { Appearance } from './Appearance';
 import { Devices } from './Devices';
+import { Encryption } from './Encryption';
 
 export type SettingsTabName =
     | 'accounts'
@@ -88,6 +89,7 @@ export function Settings({
                     <SettingsPage>
                         {tab === 'appearance' && <Appearance />}
                         {tab === 'devices' && <Devices />}
+                        {tab === 'encryption' && <Encryption />}
                     </SettingsPage>
                 </div>
             </DialogContent>
