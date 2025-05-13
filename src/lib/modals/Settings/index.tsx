@@ -8,6 +8,7 @@ import {
     IconDevices,
     IconHelp,
     IconKey,
+    IconKeyboard,
     IconMicrophone,
     IconUsers,
 } from '@tabler/icons-react';
@@ -24,6 +25,7 @@ export type SettingsTabName =
     | 'encryption'
     | 'notifications'
     | 'voice-video'
+    | 'keybinds'
     | 'about';
 
 type SettingsTab = Omit<SidebarTabProps, 'active'>;
@@ -58,6 +60,11 @@ const tabs: SettingsTab[] = [
         id: 'voice-video',
         icon: IconMicrophone,
         label: 'Voice & Video',
+    },
+    {
+        id: 'keybinds',
+        icon: IconKeyboard,
+        label: 'Keybinds',
     },
     {
         id: 'about',
