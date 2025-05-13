@@ -11,6 +11,7 @@ import {
     IconVideo,
 } from '@tabler/icons-react';
 import { RoomHeader } from './room-header';
+import { MessageInput } from './message-input';
 
 export type RoomViewProps = {
     roomId: string;
@@ -18,5 +19,12 @@ export type RoomViewProps = {
 };
 
 export function RoomView({ roomId, roomType }: RoomViewProps) {
-    return <RoomHeader roomId={roomId} roomType={roomType} />;
+    return (
+        <div className="flex flex-col justify-between h-full flex-1">
+            <RoomHeader roomId={roomId} roomType={roomType} />
+            <div className="p-4">
+                <MessageInput />
+            </div>
+        </div>
+    );
 }

@@ -7,9 +7,5 @@ export const Route = createFileRoute('/app/rooms/$roomId')({
 
 function RouteComponent() {
     const { roomId } = Route.useParams();
-    return (
-        <div>
-            <RoomView roomId={roomId} roomType="room" />
-        </div>
-    );
+    return <RoomView roomId={roomId} roomType="room" />;
 }

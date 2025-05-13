@@ -66,7 +66,11 @@ function RouteComponent() {
                                     params={{ roomId: room.roomId }}
                                     key={room.roomId}
                                 >
-                                    <RoomItem data={room} active={room.roomId == activeRoomId} />
+                                    <RoomItem
+                                        data={room}
+                                        active={room.roomId == activeRoomId}
+                                        context="standalone"
+                                    />
                                 </Link>
                             ))}
                         </SidebarList>

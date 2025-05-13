@@ -6,6 +6,7 @@ import { VariantProps } from 'class-variance-authority';
 
 export type RoomProps = VariantProps<typeof sidebarItem> & {
     data: Room;
+    context: 'standalone' | 'space';
 };
 
 export function RoomItem({ data, active }: RoomProps) {
