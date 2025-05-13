@@ -54,6 +54,7 @@
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-hover: oklch(0.94 0 0);
+  --secondary-hover-2: oklch(0.91 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -90,6 +91,7 @@
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-hover: oklch(0.276 0 0);
+  --secondary-hover-2: oklch(0.31 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
@@ -117,6 +119,7 @@
 @theme inline {
   --color-light-background: var(--light-background);
   --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-hover-2: var(--secondary-hover-2);
 }
 
 @layer base {

@@ -11,7 +11,7 @@ export function AttachButton() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="dark:hover:bg-secondary-hover-2">
                     <IconCirclePlus />
                 </Button>
             </DropdownMenuTrigger>

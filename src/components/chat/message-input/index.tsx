@@ -5,7 +5,7 @@ import { AttachButton } from './attach-button';
 import { getHotkeyHandler } from '@mantine/hooks';
 
 export function MessageInput() {
-    // TODO: Fix icons hover state
+    // TODO: Fix hover colors in light mode
     return (
         <div className="border border-white/5 rounded-lg flex bg-secondary-hover items-start">
             <div className="p-1 pr-0">
@@ -18,16 +18,16 @@ export function MessageInput() {
                 maxRows={10}
             />
             <div className="flex p-1 pl-0">
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="dark:hover:bg-secondary-hover-2">
                     <IconGif />
                 </Button>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="dark:hover:bg-secondary-hover-2">
                     <IconSticker />
                 </Button>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="dark:hover:bg-secondary-hover-2">
                     <IconMoodSmile />
                 </Button>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="dark:hover:bg-secondary-hover-2">
                     <IconSend2 />
                 </Button>
             </div>
