@@ -6,3 +6,4 @@ export * from './useAccounts';
 export * from './useAccount';
 export * from './useSetTitle';
 export * from './useVerificationRequest';
+export * from './useClientEvent';

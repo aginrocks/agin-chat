@@ -1,7 +1,7 @@
-import { useMatrixClient } from '@lib/hooks';
+import { useClientEvent, useMatrixClient } from '@lib/hooks';
 import { atom, useSetAtom } from 'jotai';
 import { ClientEvent, Room } from 'matrix-js-sdk';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export const RoomsAtom = atom<Room[]>([]);
 
@@ -15,19 +15,18 @@ export function useBindRooms() {
         if (!mx) return;
 
         setRoomsAtom(mx.getRooms());
-
-        const handleAddRoom = (room: Room) => {
-            setRoomsAtom((prevRooms) => {
-                const exists = prevRooms.some((r) => r.roomId === room.roomId);
-                if (exists) return prevRooms;
-                return [...prevRooms, room];
-            });
-        };
-
-        mx.on(ClientEvent.Room, handleAddRoom);
-
-        return () => {
-            mx.off(ClientEvent.Room, handleAddRoom);
-        };
     }, [mx, setRoomsAtom]);
+
+    useClientEvent(
+        ClientEvent.Room,
+        useCallback(
+            (room: Room) => {
+                if (!mx) return;
+                console.log('room event', room);
+
+                setRoomsAtom(() => mx.getRooms());
+            },
+            [setRoomsAtom, mx]
+        )
+    );
 }
