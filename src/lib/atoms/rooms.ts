@@ -9,24 +9,13 @@ export function useBindRooms() {
     const mx = useMatrixClient();
     const setRoomsAtom = useSetAtom(RoomsAtom);
 
-    useEffect(() => {
-        console.log('binding rooms');
-
+    const bind = useCallback(() => {
         if (!mx) return;
 
-        setRoomsAtom(mx.getRooms());
-    }, [mx, setRoomsAtom]);
+        setRoomsAtom(() => mx.getRooms());
+    }, [setRoomsAtom, mx]);
 
-    useClientEvent(
-        ClientEvent.Room,
-        useCallback(
-            (room: Room) => {
-                if (!mx) return;
-                console.log('room event', room);
+    useEffect(bind, [bind]);
 
-                setRoomsAtom(() => mx.getRooms());
-            },
-            [setRoomsAtom, mx]
-        )
-    );
+    useClientEvent(ClientEvent.Room, bind);
 }
