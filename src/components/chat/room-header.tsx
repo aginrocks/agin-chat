@@ -72,7 +72,7 @@ export function RoomHeader({ roomId, roomType }: RoomHeaderProps) {
             </div>
             <div className="flex gap-0.5">
                 {actions.map(({ icon: Icon, label, ...props }) => (
-                    <Tooltip>
+                    <Tooltip key={label}>
                         <TooltipTrigger>
                             <Button variant="ghost" size="icon" {...props}>
                                 <Icon />
