@@ -5,7 +5,6 @@ import { AttachButton } from './attach-button';
 import { getHotkeyHandler } from '@mantine/hooks';
 
 export function MessageInput() {
-    // TODO: Fix hover colors in light mode
     return (
         <div className="border border-white/5 rounded-lg flex bg-secondary-hover items-start">
             <div className="p-1 pr-0">

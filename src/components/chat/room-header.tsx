@@ -1,7 +1,17 @@
 import { Button } from '@components/ui/button';
 import { Header } from '@components/ui/header';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@components/ui/tooltip';
-import { Icon, IconLayoutSidebarRight, IconPhone, IconPin, IconVideo } from '@tabler/icons-react';
+import { DirectsAtom, SidebarOpenAtom, SidebarTabAtom } from '@lib/atoms';
+import {
+    Icon,
+    IconLayoutSidebarRight,
+    IconLayoutSidebarRightFilled,
+    IconPhone,
+    IconPin,
+    IconUsers,
+    IconVideo,
+} from '@tabler/icons-react';
+import { useAtom, useAtomValue } from 'jotai';
 import { useMemo } from 'react';
 
 export type RoomHeaderProps = {
@@ -9,12 +19,15 @@ export type RoomHeaderProps = {
     roomType: 'direct' | 'room' | 'space';
 };
 
-export type Action = {
+export type Action = React.ComponentProps<'button'> & {
     icon: Icon;
     label: string;
 };
 
 export function RoomHeader({ roomId, roomType }: RoomHeaderProps) {
+    const [sidebarOpen, setSidebarOpen] = useAtom(SidebarOpenAtom);
+    const [sidebarTab, setSidebarTab] = useAtom(SidebarTabAtom);
+
     const actions = useMemo<Action[]>(
         () => [
             {
@@ -29,12 +42,21 @@ export function RoomHeader({ roomId, roomType }: RoomHeaderProps) {
                 icon: IconPin,
                 label: 'Pinned messages',
             },
+            ...(roomType !== 'direct'
+                ? [
+                      {
+                          icon: IconUsers,
+                          label: 'Members',
+                      },
+                  ]
+                : []),
             {
-                icon: IconLayoutSidebarRight,
-                label: 'Sidebar',
+                icon: sidebarOpen ? IconLayoutSidebarRightFilled : IconLayoutSidebarRight,
+                label: `${sidebarOpen ? 'Hide' : 'Show'} Sidebar`,
+                onClick: () => setSidebarOpen((o) => !o),
             },
         ],
-        []
+        [roomType, sidebarOpen]
     );
 
     return (
@@ -49,15 +71,15 @@ export function RoomHeader({ roomId, roomType }: RoomHeaderProps) {
                 )}
             </div>
             <div className="flex gap-0.5">
-                {actions.map((a) => (
+                {actions.map(({ icon: Icon, label, ...props }) => (
                     <Tooltip>
                         <TooltipTrigger>
-                            <Button variant="ghost" size="icon">
-                                <a.icon />
+                            <Button variant="ghost" size="icon" {...props}>
+                                <Icon />
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent side="bottom" sideOffset={4}>
-                            <p>{a.label}</p>
+                            <p>{label}</p>
                         </TooltipContent>
                     </Tooltip>
                 ))}
