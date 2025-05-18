@@ -1,27 +1,26 @@
 import { Direct } from '@lib/atoms';
-import { cn } from '@lib/utils';
+import { cn, mxcUrlToHttp } from '@lib/utils';
 import { sidebarItem } from './secondary-sidebar/SidebarItem';
 import { VariantProps } from 'class-variance-authority';
 import { Avatar } from './avatar';
 import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import { useAccount, useMatrixClient } from '@lib/hooks';
+import { useMatrixClient } from '@lib/hooks';
 
 export type DirectRoomProps = VariantProps<typeof sidebarItem> & {
     data: Direct;
 };
 
 export function DirectRoomItem({ data, active }: DirectRoomProps) {
-    // const mx = useMatrixClient();
-    // const [account] = useAccount();
+    const mx = useMatrixClient();
 
     // FIXME: avatars
-    // const avatarUrl = data.room?.getAvatarUrl(account?.base_url ?? '', 32, 32, 'crop') ?? '';
-    // console.log(avatarUrl);
+    const avatarUrl = mxcUrlToHttp(mx, data.user?.avatarUrl ?? '', true) ?? '';
+    console.log(avatarUrl);
 
     return (
         <div className={cn(sidebarItem({ active }), 'gap-3 py-1.5')}>
             <Avatar className="h-8 w-8 flex justify-center items-center bg-white/5">
-                {/* <AvatarImage src={avatarUrl} /> */}
+                <AvatarImage src={avatarUrl} />
                 <AvatarFallback className="text-xs">
                     {data?.room?.name.charAt(0).toUpperCase()}
                 </AvatarFallback>

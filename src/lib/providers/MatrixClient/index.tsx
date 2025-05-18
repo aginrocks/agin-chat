@@ -21,8 +21,6 @@ export function MatrixClientProvider({ children }: MatrixClientProviderProps) {
         client,
         useCallback(
             (state) => {
-                console.log({ state });
-
                 if (state === 'PREPARED') {
                     setLoading(false);
                 }

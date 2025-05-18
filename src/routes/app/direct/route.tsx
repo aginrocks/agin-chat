@@ -1,15 +1,14 @@
 import { Button } from '@components/ui/button';
 import { DirectRoomItem } from '@components/ui/direct-room';
 import { Header } from '@components/ui/header';
-import { RoomItem } from '@components/ui/room';
 import { ScrollArea } from '@components/ui/scroll-area';
 import { SecondarySidebarWrapper } from '@components/ui/secondary-sidebar';
 import { SidebarList } from '@components/ui/secondary-sidebar/SidebarList';
-import { DirectsAtom, RoomsAtom } from '@lib/atoms';
+import { DirectsAtom } from '@lib/atoms';
 import { useSetTitle } from '@lib/hooks';
 import { IconPlus, IconUsers } from '@tabler/icons-react';
 import { createFileRoute, Link, Outlet, useLocation } from '@tanstack/react-router';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 export const Route = createFileRoute('/app/direct')({
     component: RouteComponent,
