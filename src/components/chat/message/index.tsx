@@ -1,6 +1,6 @@
-import { MatrixEvent, User } from 'matrix-js-sdk';
+import { MatrixEvent } from 'matrix-js-sdk';
 import { MessageBody } from './body';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useMatrixClient } from '@lib/hooks';
 import { MatrixAvatar } from '@components/ui/matrix-avatar';
 import { MessageActions } from './actions';
@@ -33,7 +33,22 @@ export function MessageInner({ data, isFirst = true }: MessageProps) {
 
     const { ref, hovered } = useHover();
     const dropdownOpen = useAtomValue(DropdownOpenAtom);
-    const actionsVisible = hovered || dropdownOpen;
+
+    const [dropdownOpenDelayed, setDropdownOpenDelayed] = useState(false);
+
+    useEffect(() => {
+        if (dropdownOpen) {
+            setDropdownOpenDelayed(true);
+        } else {
+            const timeout = setTimeout(() => {
+                setDropdownOpenDelayed(false);
+            }, 200);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [dropdownOpen]);
+
+    const actionsVisible = hovered || dropdownOpenDelayed;
 
     return (
         <div

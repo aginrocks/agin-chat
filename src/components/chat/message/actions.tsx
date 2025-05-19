@@ -1,7 +1,4 @@
-import { Button } from '@components/ui/button';
 import {
-    IconBraces,
-    IconCircleLetterI,
     IconCircleNumber1,
     IconCodeCircle,
     IconCopy,
