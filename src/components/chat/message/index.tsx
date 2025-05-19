@@ -52,11 +52,11 @@ export function MessageInner({ data, isFirst = true }: MessageProps) {
             </div>
             <div
                 className={cn(
-                    'absolute right-4 top-0 -translate-y-1/2',
+                    'absolute right-4 top-0 -translate-y-9/12',
                     clsx({ hidden: !actionsVisible })
                 )}
             >
-                <MessageActions />
+                <MessageActions canEdit={mx?.getUserId() === sender} canDelete />
             </div>
         </div>
     );

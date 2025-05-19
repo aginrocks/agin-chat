@@ -23,7 +23,11 @@ export function MessageAction({ children, className, label, ...props }: MessageA
                     {children}
                 </Button>
             </TooltipTrigger>
-            <TooltipContent side="top" sideOffset={6} className="bg-secondary-hover">
+            <TooltipContent
+                side="top"
+                sideOffset={6}
+                className="bg-secondary-hover border-light-border"
+            >
                 <p>{label}</p>
             </TooltipContent>
         </Tooltip>

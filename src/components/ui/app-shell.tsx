@@ -11,7 +11,7 @@ export function AppShell({ children }: AppShellProps) {
             <Titlebar />
             <div className="flex w-full flex-1">
                 <PrimarySidebar />
-                <div className="border-t border-l rounded-tl-lg border-black/5 dark:border-white/5 flex-1">
+                <div className="border-t border-l rounded-tl-lg border-light-border flex-1">
                     {children}
                 </div>
             </div>
