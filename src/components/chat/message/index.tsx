@@ -3,24 +3,60 @@ import { MessageBody } from './body';
 import { useMemo } from 'react';
 import { useMatrixClient } from '@lib/hooks';
 import { MatrixAvatar } from '@components/ui/matrix-avatar';
+import { MessageActions } from './actions';
+import { useHover } from '@mantine/hooks';
+import { cn } from '@lib/utils';
+import clsx from 'clsx';
+import { atom, useAtomValue } from 'jotai';
+import { ScopeProvider } from 'jotai-scope';
 
 export type MessageProps = {
     data: MatrixEvent;
     isFirst?: boolean;
 };
 
-export function Message({ data, isFirst = true }: MessageProps) {
+export const DropdownOpenAtom = atom(false);
+
+export function Message(props: MessageProps) {
+    return (
+        <ScopeProvider atoms={[DropdownOpenAtom]}>
+            <MessageInner {...props} />
+        </ScopeProvider>
+    );
+}
+
+export function MessageInner({ data, isFirst = true }: MessageProps) {
     const mx = useMatrixClient();
 
     const sender = useMemo(() => data.getSender(), [data]);
     const user = useMemo(() => (sender ? mx?.getUser(sender) : null), [mx, data, sender]);
 
+    const { ref, hovered } = useHover();
+    const dropdownOpen = useAtomValue(DropdownOpenAtom);
+    const actionsVisible = hovered || dropdownOpen;
+
     return (
-        <div className="px-4 py-0.5 hover:bg-black/2 hover:dark:bg-white/2 flex gap-2">
-            <div className="w-10">{isFirst && user && <MatrixAvatar user={user} size="md" />}</div>
+        <div
+            className={cn(
+                'px-4 py-0.5 flex gap-3 relative',
+                clsx({ 'bg-black/2 dark:bg-white/2': actionsVisible })
+            )}
+            ref={ref}
+        >
+            <div className="w-10 min-w-10">
+                {isFirst && user && <MatrixAvatar user={user} size="md" />}
+            </div>
             <div>
                 {isFirst && <div className="text-sm font-semibold">{user?.displayName}</div>}
                 <MessageBody data={data} />
+            </div>
+            <div
+                className={cn(
+                    'absolute right-4 top-0 -translate-y-1/2',
+                    clsx({ hidden: !actionsVisible })
+                )}
+            >
+                <MessageActions />
             </div>
         </div>
     );

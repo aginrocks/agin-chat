@@ -7,3 +7,4 @@ export * from './useAccount';
 export * from './useSetTitle';
 export * from './useVerificationRequest';
 export * from './useClientEvent';
+export * from './useModifier';

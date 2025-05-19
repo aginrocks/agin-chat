@@ -1,18 +1,6 @@
-import { Button } from '@components/ui/button';
-import { Header } from '@components/ui/header';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@components/ui/tooltip';
-import {
-    IconDots,
-    IconLayoutSidebarRight,
-    IconPhone,
-    IconPin,
-    IconUserCircle,
-    IconUsers,
-    IconVideo,
-} from '@tabler/icons-react';
 import { RoomHeader } from './room-header';
 import { MessageInput } from './message-input';
-import { createStore, Provider, useAtomValue } from 'jotai';
+import { createStore, useAtomValue } from 'jotai';
 import { SidebarOpenAtom } from '@lib/atoms';
 import { RoomSidebar } from './room-sidebar';
 import { RoomTimeline } from './room-timeline';
@@ -35,7 +23,7 @@ export function RoomView({ roomId, roomType }: RoomViewProps) {
             <div className="flex flex-1 w-full h-full">
                 <div className="flex-1 h-full flex flex-col">
                     <RoomTimeline roomId={roomId} />
-                    <div className="p-4 pt-0">
+                    <div className="pb-5 pt-0 px-2">
                         <MessageInput />
                     </div>
                 </div>

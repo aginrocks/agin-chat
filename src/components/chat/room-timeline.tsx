@@ -38,7 +38,7 @@ export function RoomTimeline({ roomId }: RoomTimelineProps) {
 
     return (
         <ScrollArea className="flex-1 h-1">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 pb-3 pt-6">
                 {messages.map((m) => (
                     <MessageGroup key={m.getId()} data={[{ data: m }, { data: m }]} />
                 ))}
