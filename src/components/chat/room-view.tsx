@@ -15,6 +15,7 @@ import { MessageInput } from './message-input';
 import { createStore, Provider, useAtomValue } from 'jotai';
 import { SidebarOpenAtom } from '@lib/atoms';
 import { RoomSidebar } from './room-sidebar';
+import { RoomTimeline } from './room-timeline';
 
 export type RoomViewProps = {
     roomId: string;
@@ -32,8 +33,11 @@ export function RoomView({ roomId, roomType }: RoomViewProps) {
         <div className="flex flex-col h-full flex-1">
             <RoomHeader roomId={roomId} roomType={roomType} />
             <div className="flex flex-1 w-full h-full">
-                <div className="p-4 flex-1 h-full flex flex-col justify-end">
-                    <MessageInput />
+                <div className="flex-1 h-full flex flex-col">
+                    <RoomTimeline roomId={roomId} />
+                    <div className="p-4 pt-0">
+                        <MessageInput />
+                    </div>
                 </div>
                 {sidebarOpen && <RoomSidebar />}
             </div>
