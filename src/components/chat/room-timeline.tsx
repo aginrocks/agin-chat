@@ -1,40 +1,12 @@
-import { ScrollArea } from '@components/ui/scroll-area';
-import { useMatrixClient, useRoom, useTimeline, useGroupEvents } from '@lib/hooks';
-import { MatrixEvent, RoomEvent } from 'matrix-js-sdk';
-import { useEffect, useState } from 'react';
+import { useTimeline, useGroupEvents } from '@lib/hooks';
 import { MessageGroup } from './message';
+import { ScrollArea } from '@components/ui/scroll-area';
 
 export type RoomTimelineProps = {
     roomId: string;
 };
 
 export function RoomTimeline({ roomId }: RoomTimelineProps) {
-    // const [messages, setMessages] = useState<MatrixEvent[]>([]);
-    // const mx = useMatrixClient();
-
-    // const room = useRoom(roomId);
-
-    // useEffect(() => {
-    //     if (!mx || !room) return;
-
-    //     const updateMessages = () => {
-    //         const events = room.getLiveTimeline().getEvents();
-    //         setMessages(events);
-    //     };
-
-    //     updateMessages();
-
-    //     const onTimelineUpdate = () => {
-    //         updateMessages();
-    //     };
-
-    //     room.on(RoomEvent.Timeline, onTimelineUpdate);
-
-    //     return () => {
-    //         room.off(RoomEvent.Timeline, onTimelineUpdate);
-    //     };
-    // }, [mx, room]);
-
     const timeline = useTimeline({ roomId });
 
     // Use our new hook to group messages by sender and time proximity
