@@ -8,3 +8,4 @@ export * from './useSetTitle';
 export * from './useVerificationRequest';
 export * from './useClientEvent';
 export * from './useModifier';
+export * from './useRoom';

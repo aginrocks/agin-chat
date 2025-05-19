@@ -9,6 +9,7 @@ import { cn } from '@lib/utils';
 import clsx from 'clsx';
 import { atom, useAtomValue } from 'jotai';
 import { ScopeProvider } from 'jotai-scope';
+import { MessageTiming } from './timing';
 
 export type MessageProps = {
     data: MatrixEvent;
@@ -58,11 +59,21 @@ export function MessageInner({ data, isFirst = true }: MessageProps) {
             )}
             ref={ref}
         >
-            <div className="w-10 min-w-10">
+            <div className="w-10 min-w-10 flex justify-end">
                 {isFirst && user && <MatrixAvatar user={user} size="md" />}
+                {!isFirst && hovered && (
+                    <div className="py-[2px]">
+                        <MessageTiming data={data} forceHoursOnly />
+                    </div>
+                )}
             </div>
             <div>
-                {isFirst && <div className="text-sm font-semibold">{user?.displayName}</div>}
+                {isFirst && (
+                    <div className="flex items-center gap-1.5">
+                        <div className="text-sm font-semibold">{user?.displayName}</div>
+                        <MessageTiming data={data} />
+                    </div>
+                )}
                 <MessageBody data={data} />
             </div>
             <div
