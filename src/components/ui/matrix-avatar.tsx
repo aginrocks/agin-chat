@@ -1,8 +1,9 @@
-import { useMatrixClient } from '@lib/hooks';
-import { cn, mxcUrlToHttp } from '@lib/utils';
+import { useMatrixMedia } from '@lib/hooks';
+import { cn } from '@lib/utils';
 import { User } from 'matrix-js-sdk';
 import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import { cva, VariantProps } from 'class-variance-authority';
+import { useState } from 'react';
 
 export type MatrixAvatarProps = VariantProps<typeof sizeVariants> & {
     user: User;
@@ -23,17 +24,26 @@ const sizeVariants = cva('', {
 });
 
 export function MatrixAvatar({ user, fallbackName, size }: MatrixAvatarProps) {
-    const mx = useMatrixClient();
+    const [imageError, setImageError] = useState(false);
+    const { url: avatarUrl, loading, error } = useMatrixMedia(user.avatarUrl);
 
-    // FIXME: avatars
-    const avatarUrl = mxcUrlToHttp(mx, user.avatarUrl ?? '', true) ?? '';
-    console.log(avatarUrl);
+    // Log for debugging
+    console.log('MXC URL:', user.avatarUrl);
+    console.log('Processed URL:', avatarUrl);
+    console.log('Media loading:', loading);
+    console.log('Media error:', error);
 
     return (
         <Avatar
             className={cn('flex justify-center items-center bg-white/5', sizeVariants({ size }))}
         >
-            <AvatarImage src={avatarUrl} />
+            {avatarUrl && !imageError && !error ? (
+                <AvatarImage
+                    src={avatarUrl}
+                    onError={() => setImageError(true)}
+                    crossOrigin="anonymous" // Try with crossOrigin to help with CORS issues
+                />
+            ) : null}
             <AvatarFallback className="text-xs">
                 {(fallbackName || user.displayName)?.charAt(0).toUpperCase() ?? ''}
             </AvatarFallback>

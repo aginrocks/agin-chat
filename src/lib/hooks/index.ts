@@ -11,3 +11,4 @@ export * from './useModifier';
 export * from './useRoom';
 export * from './useTimeline';
 export * from './useGroupEvents';
+export * from './useMatrixMedia';

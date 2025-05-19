@@ -14,6 +14,11 @@ export const isRoomId = (id: string): boolean => validMxId(id) && id.startsWith(
 
 export const isRoomAlias = (id: string): boolean => validMxId(id) && id.startsWith('#');
 
+/**
+ * Convert MXC URL to HTTP URL using matrix-js-sdk
+ * Note: This function will only work if you're properly authenticated.
+ * For issues with authenticated media, try using getAuthenticatedMediaUrl from matrix-media.ts
+ */
 export const mxcUrlToHttp = (
     mx: MatrixClient | undefined,
     mxcUrl: string,
