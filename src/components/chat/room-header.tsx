@@ -2,6 +2,7 @@ import { Button } from '@components/ui/button';
 import { Header } from '@components/ui/header';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@components/ui/tooltip';
 import { DirectsAtom, SidebarOpenAtom, SidebarTabAtom } from '@lib/atoms';
+import { useRoom } from '@lib/hooks';
 import {
     Icon,
     IconLayoutSidebarRight,
@@ -11,7 +12,7 @@ import {
     IconUsers,
     IconVideo,
 } from '@tabler/icons-react';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { useMemo } from 'react';
 
 export type RoomHeaderProps = {
@@ -27,6 +28,8 @@ export type Action = React.ComponentProps<'button'> & {
 export function RoomHeader({ roomId, roomType }: RoomHeaderProps) {
     const [sidebarOpen, setSidebarOpen] = useAtom(SidebarOpenAtom);
     const [sidebarTab, setSidebarTab] = useAtom(SidebarTabAtom);
+
+    const room = useRoom(roomId);
 
     const actions = useMemo<Action[]>(
         () => [
@@ -62,7 +65,7 @@ export function RoomHeader({ roomId, roomType }: RoomHeaderProps) {
     return (
         <Header custom className="px-4 items-center justify-between">
             <div className="flex items-center gap-2">
-                <div className="font-semibold">Room Name</div>
+                <div className="font-semibold">{room?.name}</div>
                 {roomType !== 'direct' && (
                     <>
                         <div className="text-muted-foreground">•</div>

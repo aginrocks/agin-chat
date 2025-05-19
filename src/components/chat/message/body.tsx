@@ -7,10 +7,5 @@ export type MessageBodyProps = {
 
 export function MessageBody({ data }: MessageBodyProps) {
     if (data.isRedacted()) return <Redacted />;
-    return (
-        <div className="text-sm">
-            {data.getContent().body}
-            {data.getType()}
-        </div>
-    );
+    return <div className="text-sm">{data.getContent().body}</div>;
 }
