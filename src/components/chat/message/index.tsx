@@ -1,6 +1,6 @@
 import { MatrixEvent } from 'matrix-js-sdk';
 import { MessageBody } from './body';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useMatrixClient } from '@lib/hooks';
 import { MatrixAvatar } from '@components/ui/matrix-avatar';
 import { MessageActions } from './actions';
