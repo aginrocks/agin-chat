@@ -16,7 +16,7 @@ export function RoomTimeline({ roomId }: RoomTimelineProps) {
         <ScrollArea
             className="flex-1 h-1"
             type="always"
-            scrollbarProps={{ className: 'mx-2 py-2' }}
+            scrollbarProps={{ className: 'mr-1 py-2' }}
         >
             <div className="flex flex-col gap-2 pb-3 pt-6">
                 {groupedMessages.map((group, index) => (
