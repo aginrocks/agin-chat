@@ -1,6 +1,5 @@
 FROM nailyudha/tauri:latest
 
-USER nonroot
 WORKDIR /home/nonroot
 
 # Define and persist pnpm path
